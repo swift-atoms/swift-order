@@ -7,9 +7,9 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-public import Property_Primitives
 public import Comparison_Primitives
 public import Order_Comparator_Primitives
+public import Property_Primitives
 
 // MARK: - Core Methods (require explicit comparator)
 

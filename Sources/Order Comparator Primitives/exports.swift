@@ -8,5 +8,5 @@
 // SPDX-License-Identifier: Apache-2.0
 
 // Re-export immediate dependencies for consumers.
-@_exported public import Order_Primitive
 @_exported public import Comparison_Primitives
+@_exported public import Order_Primitive
