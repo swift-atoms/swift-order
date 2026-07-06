@@ -53,7 +53,7 @@ extension Order.Monotonicity {
     /// Reversed monotonicity (swaps increasing↔decreasing, preserves constant).
     @inlinable
     public var reversed: Order.Monotonicity {
-        Order.Monotonicity.reversed(self)
+        Self.reversed(self)
     }
 
     /// Returns the reversed monotonicity.
@@ -79,7 +79,7 @@ extension Order.Monotonicity {
     /// Monotonicity of composing two monotonic functions (f ∘ g).
     @inlinable
     public func composing(_ other: Order.Monotonicity) -> Order.Monotonicity {
-        Order.Monotonicity.composing(self, other)
+        Self.composing(self, other)
     }
 }
 
