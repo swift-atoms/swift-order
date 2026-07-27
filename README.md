@@ -154,12 +154,6 @@ Direct dependencies:
 
 ---
 
-## Community
-
-<!-- BEGIN: discussion -->
-Discuss this package: [swift-institute/discussions/27](https://github.com/orgs/swift-institute/discussions/27)
-<!-- END: discussion -->
-
 ---
 
 ## License
