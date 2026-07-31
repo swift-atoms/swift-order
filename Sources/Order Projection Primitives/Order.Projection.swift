@@ -20,9 +20,8 @@ extension Order {
     ///
     /// ```swift
     /// let byAge = Order.Projection<Person, Int>(
-    ///     { $0.age },
     ///     direction: .descending
-    /// )
+    /// ) { $0.age }
     /// ```
     ///
     /// ## Converting to Comparator
@@ -53,13 +52,13 @@ extension Order {
         /// Creates a projection with the given extractor and direction.
         ///
         /// - Parameters:
+        ///   - direction: The direction of ordering. Defaults to `.ascending`.
         ///   - extract: A function that extracts the comparable value from
         ///     an instance of the root type.
-        ///   - direction: The direction of ordering. Defaults to `.ascending`.
         @inlinable
         public init(
-            _ extract: @escaping @Sendable (borrowing Root) -> Value,
-            direction: Direction = .ascending
+            direction: Direction = .ascending,
+            _ extract: @escaping @Sendable (borrowing Root) -> Value
         ) {
             self.extract = extract
             self.direction = direction
@@ -75,7 +74,7 @@ extension Order.Projection where Root: ~Copyable, Value: Comparison.`Protocol` &
     /// - `.descending` becomes `.ascending`
     @inlinable
     public var reversed: Self {
-        Self(extract, direction: direction.reversed)
+        Self(direction: direction.reversed, extract)
     }
 
     /// Converts this projection to a comparator.

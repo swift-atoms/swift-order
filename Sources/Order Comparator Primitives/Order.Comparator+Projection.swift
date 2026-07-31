@@ -46,20 +46,19 @@ extension Order.Comparator where T: ~Copyable {
     ///
     /// ```swift
     /// let byNameCaseInsensitive = Order.Comparator<Person>.by(
-    ///     { $0.name.lowercased() },
     ///     using: .ascending
-    /// )
+    /// ) { $0.name.lowercased() }
     /// ```
     ///
     /// - Parameters:
-    ///   - selector: A function that extracts the key from a value.
     ///   - comparator: The comparator to use for comparing extracted keys.
+    ///   - selector: A function that extracts the key from a value.
     /// - Returns: A comparator that orders values by their extracted keys
     ///   using the specified comparator.
     @inlinable
     public static func by<Value: ~Copyable>(
-        _ selector: @escaping @Sendable (borrowing T) -> Value,
-        using comparator: Order.Comparator<Value>
+        using comparator: Order.Comparator<Value>,
+        _ selector: @escaping @Sendable (borrowing T) -> Value
     ) -> Order.Comparator<T> {
         Order.Comparator { lhs, rhs in
             comparator(selector(lhs), selector(rhs))

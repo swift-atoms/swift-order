@@ -274,9 +274,8 @@ extension `Order Tests`.Unit.`Comparator Projection` {
     @Test
     func `By selector with custom comparator`() {
         let byAgeDescending = Order.Comparator<Person>.by(
-            { $0.age },
             using: .descending
-        )
+        ) { $0.age }
 
         let alice30 = Person(name: "Alice", age: 30)
         let bob25 = Person(name: "Bob", age: 25)
@@ -376,9 +375,8 @@ extension `Order Tests`.Unit.`Noncopyable Support` {
         }
 
         let byToken = Order.Comparator<Container>.by(
-            { Comparison(comparing: $0.token.id, to: 0).isGreater ? $0.token.id : 0 },
             using: .ascending
-        )
+        ) { Comparison(comparing: $0.token.id, to: 0).isGreater ? $0.token.id : 0 }
 
         let a = Container(tokenId: 5)
         let b = Container(tokenId: 10)

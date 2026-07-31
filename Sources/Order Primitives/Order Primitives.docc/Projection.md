@@ -13,9 +13,8 @@ A key-extracting projection that converts to an `Order.Comparator` with a chosen
 
 ```swift
 let byAgeDescending = Order.Projection<Person, Int>(
-    { $0.age },
     direction: .descending
-)
+) { $0.age }
 
 let comparator = byAgeDescending.comparator   // Order.Comparator<Person>
 ```
