@@ -68,7 +68,10 @@ extension Order.Monotonicity {
 extension Order.Monotonicity {
     /// Monotonicity of composing two monotonic functions (f ∘ g).
     @inlinable
-    public static func composing(_ lhs: Order.Monotonicity, _ rhs: Order.Monotonicity) -> Order.Monotonicity {
+    public static func composing(
+        _ lhs: Order.Monotonicity,
+        _ rhs: Order.Monotonicity
+    ) -> Order.Monotonicity {
         switch (lhs, rhs) {
         case (.constant, _), (_, .constant): return .constant
         case (.increasing, .increasing), (.decreasing, .decreasing): return .increasing
