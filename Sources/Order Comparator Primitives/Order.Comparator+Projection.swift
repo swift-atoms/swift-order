@@ -27,13 +27,9 @@ extension Order.Comparator where T: ~Copyable {
     ///   from a value.
     /// - Returns: A comparator that orders values by their extracted keys.
     @inlinable
-    public static func by<Value: Comparison.`Protocol` & ~Copyable>(
+    public static func by<Value: Comparison.`Protocol` & SendableMetatype & ~Copyable>(
         _ selector: @escaping @Sendable (borrowing T) -> Value
     ) -> Order.Comparator<T> {
-        // SAFETY: `Value.Type` is a metatype — a pointer into read-only type
-        // metadata, inherently Sendable. `#SendableMetatypes` cannot yet
-        // distinguish "metatype of Value" (always safe) from a value of Value.
-        nonisolated(unsafe) let _: Value.Type = Value.self
         return Order.Comparator { lhs, rhs in
             Comparison(selector(lhs), selector(rhs))
         }

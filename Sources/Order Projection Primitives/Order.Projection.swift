@@ -41,7 +41,10 @@ extension Order {
     /// struct Token: ~Copyable, Comparison.Protocol { let id: Int; ... }
     /// let byId = Order.Projection<Token, Token> { $0 }
     /// ```
-    public struct Projection<Root: ~Copyable, Value: Comparison.`Protocol` & ~Copyable>: Sendable {
+    public struct Projection<
+        Root: ~Copyable,
+        Value: Comparison.`Protocol` & SendableMetatype & ~Copyable
+    >: Sendable {
         /// The key extraction function.
         @usableFromInline
         internal let extract: @Sendable (borrowing Root) -> Value

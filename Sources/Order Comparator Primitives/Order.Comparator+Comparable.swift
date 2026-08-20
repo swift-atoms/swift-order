@@ -9,7 +9,7 @@
 
 public import Comparison_Primitives
 
-extension Order.Comparator where T: Comparison.`Protocol` & ~Copyable {
+extension Order.Comparator where T: Comparison.`Protocol` & SendableMetatype & ~Copyable {
     /// Creates a comparator using the natural ordering of a `Comparison.Protocol` type.
     ///
     /// ```swift
@@ -20,10 +20,6 @@ extension Order.Comparator where T: Comparison.`Protocol` & ~Copyable {
     /// ```
     @inlinable
     public init() {
-        // SAFETY: `T.Type` is a metatype — a pointer into read-only type
-        // metadata, inherently Sendable. `#SendableMetatypes` cannot yet
-        // distinguish "metatype of T" (always safe) from a value of T.
-        nonisolated(unsafe) let _: T.Type = T.self
         self.init { lhs, rhs in
             Comparison(lhs, rhs)
         }

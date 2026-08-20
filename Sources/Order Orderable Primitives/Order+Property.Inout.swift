@@ -9,7 +9,7 @@
 
 public import Comparison_Primitives
 public import Order_Comparator_Primitives
-public import Property_Primitives
+internal import Property_Primitives
 
 // MARK: - Core Methods (require explicit comparator)
 
@@ -70,7 +70,7 @@ extension Property.Inout where Tag == Order, Base: ~Copyable {
 // MARK: - Convenience Methods for Comparison.Protocol (use natural ordering)
 
 extension Property.Inout
-where Tag == Order, Base: Comparison.`Protocol` & ~Copyable {
+where Tag == Order, Base: Comparison.`Protocol` & SendableMetatype & ~Copyable {
 
     /// Check if self comes before other using natural ascending order.
     ///
