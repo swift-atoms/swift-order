@@ -1,11 +1,6 @@
-// Order Fluent Tests.swift
-// Tests for Order fluent API (.order property)
-
 import Testing
 
 @testable import Order_Primitives
-
-// MARK: - Suite Structure
 
 @Suite
 struct `Order Fluent Tests` {
@@ -14,8 +9,6 @@ struct `Order Fluent Tests` {
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
-
-// MARK: - Unit sub-suites
 
 extension `Order Fluent Tests`.Unit {
     @Suite struct `Copyable Types` {}
@@ -26,8 +19,6 @@ extension `Order Fluent Tests`.Unit {
     @Suite struct `Standard Type Conformances` {}
     @Suite struct `Swift.Comparable Convenience` {}
 }
-
-// MARK: - Fixtures
 
 private struct Person: Order.Orderable {
     let name: String
@@ -48,8 +39,6 @@ extension Token {
     }
 }
 
-// MARK: - Copyable Type Tests
-
 extension `Order Fluent Tests`.Unit.`Copyable Types` {
     @Test
     func `isBefore with explicit comparator`() {
@@ -60,8 +49,8 @@ extension `Order Fluent Tests`.Unit.`Copyable Types` {
             Comparison(comparing: lhs.age, to: rhs.age)
         }
 
-        #expect(alice.order.isBefore(bob, by: byAge) == false)  // 30 > 25
-        #expect(bob.order.isBefore(alice, by: byAge) == true)  // 25 < 30
+        #expect(alice.order.isBefore(bob, by: byAge) == false)
+        #expect(bob.order.isBefore(alice, by: byAge) == true)
     }
 
     @Test
@@ -73,8 +62,8 @@ extension `Order Fluent Tests`.Unit.`Copyable Types` {
             Comparison(comparing: lhs.age, to: rhs.age)
         }
 
-        #expect(alice.order.isAfter(bob, by: byAge) == true)  // 30 > 25
-        #expect(bob.order.isAfter(alice, by: byAge) == false)  // 25 < 30
+        #expect(alice.order.isAfter(bob, by: byAge) == true)
+        #expect(bob.order.isAfter(alice, by: byAge) == false)
     }
 
     @Test
@@ -87,8 +76,8 @@ extension `Order Fluent Tests`.Unit.`Copyable Types` {
             Comparison(comparing: lhs.age, to: rhs.age)
         }
 
-        #expect(alice.order.isEquivalent(to: carol, by: byAge) == true)  // same age
-        #expect(alice.order.isEquivalent(to: bob, by: byAge) == false)  // different age
+        #expect(alice.order.isEquivalent(to: carol, by: byAge) == true)
+        #expect(alice.order.isEquivalent(to: bob, by: byAge) == false)
     }
 
     @Test
@@ -103,15 +92,11 @@ extension `Order Fluent Tests`.Unit.`Copyable Types` {
             Comparison(comparing: lhs.name, to: rhs.name)
         }
 
-        // By age: Alice(30) is after Bob(25)
         #expect(alice.order.isAfter(bob, by: byAge) == true)
 
-        // By name: Alice comes before Bob
         #expect(alice.order.isBefore(bob, by: byName) == true)
     }
 }
-
-// MARK: - ~Copyable Type Tests
 
 extension `Order Fluent Tests`.Unit.`Noncopyable Types` {
     @Test
@@ -121,8 +106,8 @@ extension `Order Fluent Tests`.Unit.`Noncopyable Types` {
 
         let comparator: Order.Comparator<Token> = .ascending
 
-        #expect(a.order.isBefore(b, by: comparator) == true)  // 5 < 10
-        #expect(b.order.isBefore(a, by: comparator) == false)  // 10 > 5
+        #expect(a.order.isBefore(b, by: comparator) == true)
+        #expect(b.order.isBefore(a, by: comparator) == false)
     }
 
     @Test
@@ -132,8 +117,8 @@ extension `Order Fluent Tests`.Unit.`Noncopyable Types` {
 
         let comparator: Order.Comparator<Token> = .ascending
 
-        #expect(a.order.isAfter(b, by: comparator) == false)  // 5 < 10
-        #expect(b.order.isAfter(a, by: comparator) == true)  // 10 > 5
+        #expect(a.order.isAfter(b, by: comparator) == false)
+        #expect(b.order.isAfter(a, by: comparator) == true)
     }
 
     @Test
@@ -144,12 +129,10 @@ extension `Order Fluent Tests`.Unit.`Noncopyable Types` {
 
         let comparator: Order.Comparator<Token> = .ascending
 
-        #expect(a.order.isEquivalent(to: c, by: comparator) == true)  // same id
-        #expect(a.order.isEquivalent(to: b, by: comparator) == false)  // different id
+        #expect(a.order.isEquivalent(to: c, by: comparator) == true)
+        #expect(a.order.isEquivalent(to: b, by: comparator) == false)
     }
 }
-
-// MARK: - Comparison.Protocol Convenience Tests
 
 extension `Order Fluent Tests`.Unit.`Comparison.Protocol Convenience` {
     @Test
@@ -157,8 +140,8 @@ extension `Order Fluent Tests`.Unit.`Comparison.Protocol Convenience` {
         var a = Token(id: 5)
         var b = Token(id: 10)
 
-        #expect(a.order.isBefore(b) == true)  // 5 < 10 (natural ascending)
-        #expect(b.order.isBefore(a) == false)  // 10 > 5
+        #expect(a.order.isBefore(b) == true)
+        #expect(b.order.isBefore(a) == false)
     }
 
     @Test
@@ -166,8 +149,8 @@ extension `Order Fluent Tests`.Unit.`Comparison.Protocol Convenience` {
         var a = Token(id: 5)
         var b = Token(id: 10)
 
-        #expect(a.order.isAfter(b) == false)  // 5 < 10 (natural ascending)
-        #expect(b.order.isAfter(a) == true)  // 10 > 5
+        #expect(a.order.isAfter(b) == false)
+        #expect(b.order.isAfter(a) == true)
     }
 
     @Test
@@ -176,12 +159,10 @@ extension `Order Fluent Tests`.Unit.`Comparison.Protocol Convenience` {
         let b = Token(id: 10)
         let c = Token(id: 5)
 
-        #expect(a.order.isEquivalent(to: c) == true)  // same id
-        #expect(a.order.isEquivalent(to: b) == false)  // different id
+        #expect(a.order.isEquivalent(to: c) == true)
+        #expect(a.order.isEquivalent(to: b) == false)
     }
 }
-
-// MARK: - Descending Order Tests
 
 extension `Order Fluent Tests`.Unit.`Descending Order` {
     @Test
@@ -191,8 +172,6 @@ extension `Order Fluent Tests`.Unit.`Descending Order` {
 
         let descending: Order.Comparator<Token> = .descending
 
-        // In descending order, larger values come first
-        // So 5 is AFTER 10 in descending order
         #expect(a.order.isBefore(b, by: descending) == false)
         #expect(b.order.isBefore(a, by: descending) == true)
     }
@@ -204,14 +183,10 @@ extension `Order Fluent Tests`.Unit.`Descending Order` {
 
         let descending: Order.Comparator<Token> = .descending
 
-        // In descending order, smaller values come later
-        // So 5 is AFTER 10 in descending order
         #expect(a.order.isAfter(b, by: descending) == true)
         #expect(b.order.isAfter(a, by: descending) == false)
     }
 }
-
-// MARK: - Orderable Protocol Tests
 
 extension `Order Fluent Tests`.Unit.`Orderable Protocol` {
     @Test
@@ -247,15 +222,12 @@ extension `Order Fluent Tests`.Unit.`Orderable Protocol` {
     }
 }
 
-// MARK: - Standard Type Conformances
-
 extension `Order Fluent Tests`.Unit.`Standard Type Conformances` {
     @Test
     func `Int has .order property`() {
         var a = 5
         let b = 10
 
-        // Int conforms to Comparison.Protocol, so convenience methods work
         #expect(a.order.isBefore(b) == true)
         #expect(a.order.isAfter(b) == false)
     }
@@ -287,13 +259,10 @@ extension `Order Fluent Tests`.Unit.`Standard Type Conformances` {
         var a: UInt8 = 100
         let b: UInt8 = 200
 
-        // UInt8 conforms to Comparison.Protocol, so convenience methods work
         #expect(a.order.isBefore(b) == true)
         #expect(a.order.isEquivalent(to: a) == true)
     }
 }
-
-// MARK: - Swift.Comparable Convenience Methods
 
 extension `Order Fluent Tests`.Unit.`Swift.Comparable Convenience` {
     @Test
@@ -301,7 +270,6 @@ extension `Order Fluent Tests`.Unit.`Swift.Comparable Convenience` {
         var apple = "apple"
         let banana = "banana"
 
-        // String now has convenience methods via Swift.Comparable extension
         #expect(apple.order.isBefore(banana) == true)
         #expect(apple.order.isAfter(banana) == false)
         #expect(apple.order.isEquivalent(to: "apple") == true)
@@ -312,7 +280,6 @@ extension `Order Fluent Tests`.Unit.`Swift.Comparable Convenience` {
         var a = 1.5
         let b = 2.5
 
-        // Double now has convenience methods via Swift.Comparable extension
         #expect(a.order.isBefore(b) == true)
         #expect(a.order.isAfter(b) == false)
         #expect(a.order.isEquivalent(to: 1.5) == true)

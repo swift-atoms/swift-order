@@ -12,13 +12,12 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        // MARK: - Namespace
+
         .library(
             name: "Order Primitive",
             targets: ["Order Primitive"]
         ),
 
-        // MARK: - Sub-namespace targets
         .library(
             name: "Order Direction Primitives",
             targets: ["Order Direction Primitives"]
@@ -40,19 +39,16 @@ let package = Package(
             targets: ["Order Projection Primitives"]
         ),
 
-        // MARK: - Integration
         .library(
             name: "Order Primitives Standard Library Integration",
             targets: ["Order Primitives Standard Library Integration"]
         ),
 
-        // MARK: - Umbrella
         .library(
             name: "Order Primitives",
             targets: ["Order Primitives"]
         ),
 
-        // MARK: - Test Support
         .library(
             name: "Order Primitives Test Support",
             targets: ["Order Primitives Test Support"]
@@ -73,13 +69,12 @@ let package = Package(
         ),
     ],
     targets: [
-        // MARK: - Namespace
+
         .target(
             name: "Order Primitive",
             dependencies: []
         ),
 
-        // MARK: - Sub-namespace targets (per [MOD-031])
         .target(
             name: "Order Direction Primitives",
             dependencies: [
@@ -119,7 +114,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Integration
         .target(
             name: "Order Primitives Standard Library Integration",
             dependencies: [
@@ -130,7 +124,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Umbrella
         .target(
             name: "Order Primitives",
             dependencies: [
@@ -144,7 +137,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Test Support
         .target(
             name: "Order Primitives Test Support",
             dependencies: [
@@ -157,7 +149,6 @@ let package = Package(
             path: "Tests/Support"
         ),
 
-        // MARK: - Tests
         .testTarget(
             name: "Order Primitives Tests",
             dependencies: [

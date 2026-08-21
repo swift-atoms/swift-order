@@ -1,11 +1,6 @@
-// Order Tests.swift
-// Tests for Order primitives
-
 import Testing
 
 @testable import Order_Primitives
-
-// MARK: - Suite Structure
 
 @Suite
 struct `Order Tests` {
@@ -14,8 +9,6 @@ struct `Order Tests` {
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
-
-// MARK: - Unit sub-suites
 
 extension `Order Tests`.Unit {
     @Suite struct Direction {}
@@ -28,8 +21,6 @@ extension `Order Tests`.Unit {
     @Suite struct `Noncopyable Support` {}
     @Suite struct Sendability {}
 }
-
-// MARK: - Fixtures
 
 private struct Person {
     let name: String
@@ -50,7 +41,6 @@ extension Token {
     }
 }
 
-/// Actor fixture exercising that `Order.Comparator` is Sendable across an actor boundary.
 private actor Comparer {}
 
 extension Comparer {
@@ -59,7 +49,6 @@ extension Comparer {
     }
 }
 
-/// Actor fixture exercising that `Order.Direction` is Sendable across an actor boundary.
 private actor Holder {
     var direction: Order.Direction = .ascending
 }
@@ -68,8 +57,6 @@ extension Holder {
     func set(_ d: Order.Direction) { direction = d }
     func get() -> Order.Direction { direction }
 }
-
-// MARK: - Direction
 
 extension `Order Tests`.Unit.Direction {
     @Test
@@ -94,8 +81,6 @@ extension `Order Tests`.Unit.Direction {
     }
 }
 
-// MARK: - Comparator Basic
-
 extension `Order Tests`.Unit.Comparator {
     @Test
     func `Create from closure`() {
@@ -112,13 +97,10 @@ extension `Order Tests`.Unit.Comparator {
     func `callAsFunction syntax`() {
         let comparator: Order.Comparator<Int> = .ascending
 
-        // Can call like a function
         let result = comparator(1, 2)
         #expect(result == .less)
     }
 }
-
-// MARK: - Comparator for Swift.Comparable
 
 extension `Order Tests`.Unit.`Comparator Swift.Comparable` {
     @Test
@@ -149,8 +131,6 @@ extension `Order Tests`.Unit.`Comparator Swift.Comparable` {
     }
 }
 
-// MARK: - Comparator Reversal
-
 extension `Order Tests`.Unit.`Comparator Reversal` {
     @Test
     func `Reversed comparator`() {
@@ -167,14 +147,11 @@ extension `Order Tests`.Unit.`Comparator Reversal` {
         let comparator: Order.Comparator<Int> = .ascending
         let doubleReversed = comparator.reversed.reversed
 
-        // Test with multiple values
         for (a, b) in [(1, 2), (2, 2), (3, 2), (0, 0), (-1, 1)] {
             #expect(comparator(a, b) == doubleReversed(a, b))
         }
     }
 }
-
-// MARK: - Comparator Chaining
 
 extension `Order Tests`.Unit.`Comparator Chaining` {
     @Test
@@ -187,13 +164,10 @@ extension `Order Tests`.Unit.`Comparator Chaining` {
         let alice25 = Person(name: "Alice", age: 25)
         let bob30 = Person(name: "Bob", age: 30)
 
-        // Different name - byName decides
         #expect(comparator(alice30, bob30) == .less)
 
-        // Same name, different age - byAge decides
         #expect(comparator(alice30, alice25) == .greater)
 
-        // Same name, same age
         #expect(comparator(alice30, alice30) == .equal)
     }
 
@@ -203,27 +177,20 @@ extension `Order Tests`.Unit.`Comparator Chaining` {
             Comparison(comparing: lhs, to: rhs)
         }
 
-        // Secondary returns descending (reversed) ordering
         let secondary: @Sendable () -> Order.Comparator<Int> = {
             .descending
         }
 
         let chained = primary.then(with: secondary)
 
-        // Primary is decisive - result comes from primary
         #expect(chained(1, 2) == .less)
         #expect(chained(3, 2) == .greater)
 
-        // Primary is equal - secondary decides
-        // For (2, 2), primary returns .equal, secondary (descending) also returns .equal
         #expect(chained(2, 2) == .equal)
 
-        // Test where secondary would differ from primary
-        // Create a chained comparator where secondary reverses
         let chainedWithReverse = Order.Comparator<Int>.ascending
             .then(with: { .descending })
 
-        // When primary is decisive (not equal), use primary result
         #expect(chainedWithReverse(1, 2) == .less)
         #expect(chainedWithReverse(3, 2) == .greater)
     }
@@ -243,7 +210,6 @@ extension `Order Tests`.Unit.`Comparator Chaining` {
         let left = byX.then(byY).then(byZ)
         let right = byX.then(byY.then(byZ))
 
-        // Test with various triples
         let testCases: [(Triple, Triple)] = [
             (Triple(x: 1, y: 2, z: 3), Triple(x: 1, y: 2, z: 4)),
             (Triple(x: 1, y: 2, z: 3), Triple(x: 1, y: 3, z: 3)),
@@ -256,8 +222,6 @@ extension `Order Tests`.Unit.`Comparator Chaining` {
         }
     }
 }
-
-// MARK: - Comparator Projection
 
 extension `Order Tests`.Unit.`Comparator Projection` {
     @Test
@@ -294,16 +258,12 @@ extension `Order Tests`.Unit.`Comparator Projection` {
         let alice25 = Person(name: "Alice", age: 25)
         let bob30 = Person(name: "Bob", age: 30)
 
-        // Different name - name decides
         #expect(comparator(alice30, bob30) == .less)
 
-        // Same name, age reversed - older first
         #expect(comparator(alice30, alice25) == .less)
         #expect(comparator(alice25, alice30) == .greater)
     }
 }
-
-// MARK: - Partial Comparator
 
 extension `Order Tests`.Unit.`Partial Comparator` {
     @Test
@@ -334,8 +294,6 @@ extension `Order Tests`.Unit.`Partial Comparator` {
         #expect(comparator(Double.nan, Double.nan) == nil)
     }
 }
-
-// MARK: - Noncopyable Support
 
 extension `Order Tests`.Unit.`Noncopyable Support` {
     @Test
@@ -384,8 +342,6 @@ extension `Order Tests`.Unit.`Noncopyable Support` {
         #expect(byToken(a, b) == .less)
     }
 }
-
-// MARK: - Sendable
 
 extension `Order Tests`.Unit.Sendability {
     @Test
