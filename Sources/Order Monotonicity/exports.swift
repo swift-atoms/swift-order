@@ -1,2 +1,2 @@
 @_exported public import Order_Primitive
-@_exported public import Pair_Primitives
+@_exported public import Pair

@@ -1,6 +1,6 @@
-public import Comparison_Primitives
-public import Order_Comparator_Primitives
-internal import Property_Primitives
+public import Comparison
+public import Order_Comparator
+internal import Property
 
 extension Property.Inout where Tag == Order, Base: ~Copyable {
 

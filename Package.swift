@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-order-primitives",
+    name: "swift-order",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -19,52 +19,52 @@ let package = Package(
         ),
 
         .library(
-            name: "Order Direction Primitives",
-            targets: ["Order Direction Primitives"]
+            name: "Order Direction",
+            targets: ["Order Direction"]
         ),
         .library(
-            name: "Order Monotonicity Primitives",
-            targets: ["Order Monotonicity Primitives"]
+            name: "Order Monotonicity",
+            targets: ["Order Monotonicity"]
         ),
         .library(
-            name: "Order Comparator Primitives",
-            targets: ["Order Comparator Primitives"]
+            name: "Order Comparator",
+            targets: ["Order Comparator"]
         ),
         .library(
-            name: "Order Orderable Primitives",
-            targets: ["Order Orderable Primitives"]
+            name: "Order Orderable",
+            targets: ["Order Orderable"]
         ),
         .library(
-            name: "Order Projection Primitives",
-            targets: ["Order Projection Primitives"]
-        ),
-
-        .library(
-            name: "Order Primitives Standard Library Integration",
-            targets: ["Order Primitives Standard Library Integration"]
+            name: "Order Projection",
+            targets: ["Order Projection"]
         ),
 
         .library(
-            name: "Order Primitives",
-            targets: ["Order Primitives"]
+            name: "Order Standard Library Integration",
+            targets: ["Order Standard Library Integration"]
         ),
 
         .library(
-            name: "Order Primitives Test Support",
-            targets: ["Order Primitives Test Support"]
+            name: "Order",
+            targets: ["Order"]
+        ),
+
+        .library(
+            name: "Order Test Support",
+            targets: ["Order Test Support"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-comparison-primitives.git",
+            url: "https://github.com/swift-molecules/swift-comparison.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-property-primitives.git",
+            url: "https://github.com/swift-molecules/swift-property.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-pair-primitives.git",
+            url: "https://github.com/swift-molecules/swift-pair.git",
             branch: "main"
         ),
     ],
@@ -76,84 +76,84 @@ let package = Package(
         ),
 
         .target(
-            name: "Order Direction Primitives",
+            name: "Order Direction",
             dependencies: [
                 "Order Primitive"
             ]
         ),
         .target(
-            name: "Order Monotonicity Primitives",
+            name: "Order Monotonicity",
             dependencies: [
                 "Order Primitive",
-                .product(name: "Pair Primitives", package: "swift-pair-primitives"),
+                .product(name: "Pair", package: "swift-pair"),
             ]
         ),
         .target(
-            name: "Order Comparator Primitives",
+            name: "Order Comparator",
             dependencies: [
                 "Order Primitive",
-                .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
+                .product(name: "Comparison", package: "swift-comparison"),
             ]
         ),
         .target(
-            name: "Order Orderable Primitives",
+            name: "Order Orderable",
             dependencies: [
                 "Order Primitive",
-                "Order Comparator Primitives",
-                .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
-                .product(name: "Property Primitives", package: "swift-property-primitives"),
+                "Order Comparator",
+                .product(name: "Comparison", package: "swift-comparison"),
+                .product(name: "Property", package: "swift-property"),
             ]
         ),
         .target(
-            name: "Order Projection Primitives",
+            name: "Order Projection",
             dependencies: [
                 "Order Primitive",
-                "Order Direction Primitives",
-                "Order Comparator Primitives",
-                .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
+                "Order Direction",
+                "Order Comparator",
+                .product(name: "Comparison", package: "swift-comparison"),
             ]
         ),
 
         .target(
-            name: "Order Primitives Standard Library Integration",
+            name: "Order Standard Library Integration",
             dependencies: [
-                "Order Comparator Primitives",
-                "Order Orderable Primitives",
-                .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
-                .product(name: "Property Primitives", package: "swift-property-primitives"),
+                "Order Comparator",
+                "Order Orderable",
+                .product(name: "Comparison", package: "swift-comparison"),
+                .product(name: "Property", package: "swift-property"),
             ]
         ),
 
         .target(
-            name: "Order Primitives",
+            name: "Order",
             dependencies: [
                 "Order Primitive",
-                "Order Direction Primitives",
-                "Order Monotonicity Primitives",
-                "Order Comparator Primitives",
-                "Order Orderable Primitives",
-                "Order Projection Primitives",
-                "Order Primitives Standard Library Integration",
+                "Order Direction",
+                "Order Monotonicity",
+                "Order Comparator",
+                "Order Orderable",
+                "Order Projection",
+                "Order Standard Library Integration",
             ]
         ),
 
         .target(
-            name: "Order Primitives Test Support",
+            name: "Order Test Support",
             dependencies: [
-                "Order Primitives",
+                "Order",
                 .product(
-                    name: "Property Primitives Test Support",
-                    package: "swift-property-primitives"
+                    name: "Property Test Support",
+                    package: "swift-property"
                 ),
             ],
             path: "Tests/Support"
         ),
 
         .testTarget(
-            name: "Order Primitives Tests",
+            name: "Order Tests",
             dependencies: [
-                "Order Primitives",
-                "Order Primitives Test Support",
+                "Order",
+                "Order Test Support",
             ]
         ),
     ],

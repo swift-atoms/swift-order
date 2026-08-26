@@ -1,4 +1,4 @@
-public import Pair_Primitives
+public import Pair
 
 extension Order {
 
