@@ -1,6 +1,6 @@
-public import Comparison
+public import Comparison_Protocol
 
-extension Order.Comparator where T: Comparison.`Protocol` & SendableMetatype & ~Copyable {
+extension Order.Comparator where T: Comparison::Comparison.`Protocol` & SendableMetatype & ~Copyable {
 
     @inlinable
     public init() {

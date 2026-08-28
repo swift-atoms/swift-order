@@ -1,9 +1,9 @@
-public import Comparison
+public import Comparison_Protocol
 
 extension Order.Comparator where T: ~Copyable {
 
     @inlinable
-    public static func by<Value: Comparison.`Protocol` & SendableMetatype & ~Copyable>(
+    public static func by<Value: Comparison::Comparison.`Protocol` & SendableMetatype & ~Copyable>(
         _ selector: @escaping @Sendable (borrowing T) -> Value
     ) -> Order.Comparator<T> {
         return Order.Comparator { lhs, rhs in
