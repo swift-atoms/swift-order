@@ -1,3 +1,5 @@
+public import Pair
+
 extension Order {
 
     public enum Monotonicity: Sendable, Hashable, CaseIterable {
@@ -69,3 +71,12 @@ extension Order.Monotonicity {
     @inlinable
     public var isNonIncreasing: Bool { self != .increasing }
 }
+
+extension Order.Monotonicity {
+
+    public typealias Value<Payload> = Pair<Order.Monotonicity, Payload>
+}
+
+#if !hasFeature(Embedded)
+    extension Order.Monotonicity: Codable {}
+#endif
