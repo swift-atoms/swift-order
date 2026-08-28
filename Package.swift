@@ -88,6 +88,7 @@ let package = Package(
             dependencies: [
                 .target(name: "Order"),
                 .product(name: "Comparison", package: "swift-comparison"),
+                .product(name: "Comparison Protocol", package: "swift-comparison"),
             ]
         ),
         .target(
