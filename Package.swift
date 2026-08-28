@@ -14,11 +14,6 @@ let package = Package(
     products: [
 
         .library(
-            name: "Order Primitive",
-            targets: ["Order Primitive"]
-        ),
-
-        .library(
             name: "Order Direction",
             targets: ["Order Direction"]
         ),
@@ -56,50 +51,50 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-comparison.git",
+            url: "https://github.com/swift-atoms/swift-comparison.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-property.git",
+            url: "https://github.com/swift-atoms/swift-property.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-pair.git",
+            url: "https://github.com/swift-atoms/swift-pair.git",
             branch: "main"
         ),
     ],
     targets: [
 
         .target(
-            name: "Order Primitive",
+            name: "Order",
             dependencies: []
         ),
 
         .target(
             name: "Order Direction",
             dependencies: [
-                "Order Primitive"
+                .target(name: "Order")
             ]
         ),
         .target(
             name: "Order Monotonicity",
             dependencies: [
-                "Order Primitive",
+                .target(name: "Order"),
                 .product(name: "Pair", package: "swift-pair"),
             ]
         ),
         .target(
             name: "Order Comparator",
             dependencies: [
-                "Order Primitive",
+                .target(name: "Order"),
                 .product(name: "Comparison", package: "swift-comparison"),
             ]
         ),
         .target(
             name: "Order Orderable",
             dependencies: [
-                "Order Primitive",
-                "Order Comparator",
+                .target(name: "Order"),
+                .target(name: "Order Comparator"),
                 .product(name: "Comparison", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
             ]
@@ -107,9 +102,9 @@ let package = Package(
         .target(
             name: "Order Projection",
             dependencies: [
-                "Order Primitive",
-                "Order Direction",
-                "Order Comparator",
+                .target(name: "Order"),
+                .target(name: "Order Direction"),
+                .target(name: "Order Comparator"),
                 .product(name: "Comparison", package: "swift-comparison"),
             ]
         ),
@@ -117,30 +112,17 @@ let package = Package(
         .target(
             name: "Order Standard Library Integration",
             dependencies: [
-                "Order Comparator",
-                "Order Orderable",
+                .target(name: "Order Comparator"),
+                .target(name: "Order Orderable"),
                 .product(name: "Comparison", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
             ]
         ),
 
         .target(
-            name: "Order",
-            dependencies: [
-                "Order Primitive",
-                "Order Direction",
-                "Order Monotonicity",
-                "Order Comparator",
-                "Order Orderable",
-                "Order Projection",
-                "Order Standard Library Integration",
-            ]
-        ),
-
-        .target(
             name: "Order Test Support",
             dependencies: [
-                "Order",
+                .target(name: "Order"),
                 .product(
                     name: "Property Test Support",
                     package: "swift-property"
@@ -152,8 +134,8 @@ let package = Package(
         .testTarget(
             name: "Order Tests",
             dependencies: [
-                "Order",
-                "Order Test Support",
+                .target(name: "Order"),
+                .target(name: "Order Test Support"),
             ]
         ),
     ],
