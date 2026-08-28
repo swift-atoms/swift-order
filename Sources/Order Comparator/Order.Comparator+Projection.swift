@@ -1,4 +1,4 @@
-public import Comparison_Primitives
+public import Comparison
 
 extension Order.Comparator where T: ~Copyable {
 

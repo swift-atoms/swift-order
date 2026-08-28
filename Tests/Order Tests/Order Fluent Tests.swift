@@ -1,6 +1,6 @@
 import Testing
 
-@testable import Order_Primitives
+@testable import Order
 
 @Suite
 struct `Order Fluent Tests` {

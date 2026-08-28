@@ -1,5 +1,5 @@
-public import Comparison_Primitives
-public import Order_Direction_Primitives
+public import Comparison
+public import Order_Direction
 
 extension Order {
 

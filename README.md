@@ -4,14 +4,14 @@
 
 A reified-comparator primitive — `Order.Comparator<T>`, a `Sendable` value that captures *how* to compare two `T`s, with chaining (`.then`), projection (`.by`), reversal (`.reversed`), and a partial-order companion `Order.Comparator.Partial` for cases like NaN where two values may be incomparable.
 
-`Order` is the *operation* side of the comparison trichotomy: `Comparison` (from [`swift-comparison-primitives`](https://github.com/swift-primitives/swift-comparison-primitives)) names the **result** of a comparison (`.less` / `.equal` / `.greater`); `Order.Comparator<T>` names a **rule** for producing that result for two `T`s. Sorting and predicate code reaches for `Order` when the rule itself is the value being passed around; reaches for `Comparison.\`Protocol\`` when a single type's natural ordering is enough.
+`Order` is the *operation* side of the comparison trichotomy: `Comparison` (from [`swift-comparison`](https://github.com/swift-atoms/swift-comparison)) names the **result** of a comparison (`.less` / `.equal` / `.greater`); `Order.Comparator<T>` names a **rule** for producing that result for two `T`s. Sorting and predicate code reaches for `Order` when the rule itself is the value being passed around; reaches for `Comparison.\`Protocol\`` when a single type's natural ordering is enough.
 
 ---
 
 ## Quick Start
 
 ```swift
-import Order_Primitives
+import Order
 
 // A reified comparator — a value capturing "how to compare"
 let byAge = Order.Comparator<Person>.by { $0.age }
@@ -47,7 +47,7 @@ Add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-order-primitives.git", branch: "main"),
+    .package(url: "https://github.com/swift-atoms/swift-order.git", branch: "main"),
 ]
 ```
 
@@ -55,7 +55,7 @@ dependencies: [
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Order Primitives", package: "swift-order-primitives"),
+        .product(name: "Order", package: "swift-order"),
     ]
 )
 ```
@@ -70,9 +70,9 @@ Three packages divide the labor of ordering values:
 
 | Package | Question answered | Carries |
 |---|---|---|
-| [`swift-comparison-primitives`](https://github.com/swift-primitives/swift-comparison-primitives) | What is the *result* of comparing two values? | `Comparison` (`.less` / `.equal` / `.greater`) and `Comparison.\`Protocol\`` for types with a single natural ordering |
-| **`swift-order-primitives`** (this package) | What is the *rule* that produces that result for a given pair? | `Order.Comparator<T>` reified comparators with chaining / projection / reversal; `Order.Direction`; `Order.Projection<Root, Value>`; the `.order` fluent property |
-| [`swift-property-primitives`](https://github.com/swift-primitives/swift-property-primitives) | How does a fluent `.<verb>` chain attach to a value without forcing it into a protocol? | `Property<Tag, Base>` with `.Inout` for in-place predicates; `Order` is the phantom tag carried into `Property<Order, Self>.Inout` |
+| [`swift-comparison`](https://github.com/swift-atoms/swift-comparison) | What is the *result* of comparing two values? | `Comparison` (`.less` / `.equal` / `.greater`) and `Comparison.\`Protocol\`` for types with a single natural ordering |
+| **`swift-order`** (this package) | What is the *rule* that produces that result for a given pair? | `Order.Comparator<T>` reified comparators with chaining / projection / reversal; `Order.Direction`; `Order.Projection<Root, Value>`; the `.order` fluent property |
+| [`swift-property`](https://github.com/swift-atoms/swift-property) | How does a fluent `.<verb>` chain attach to a value without forcing it into a protocol? | `Property<Tag, Base>` with `.Inout` for in-place predicates; `Order` is the phantom tag carried into `Property<Order, Self>.Inout` |
 
 `Comparison` is the answer at the *result* layer; `Order.Comparator` is the answer at the *rule* layer. The boundary is deliberate: most code only needs one of the two — a sort routine takes a comparator, a tight inner loop takes a `Comparison.\`Protocol\``-conformant type — and the split keeps the imports honest about which one the call site actually needs.
 
@@ -84,8 +84,8 @@ Two library products covering the namespace and a Test Support target.
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `Order Primitives` | `Sources/Order Primitives/` | The `Order` namespace, all its types, and the `.order` fluent surface. Re-exports `Comparison_Primitives` so a single `import Order_Primitives` brings the result types into scope too. |
-| `Order Primitives Test Support` | `Tests/Support/` | Re-exports the umbrella plus `Property_Primitives_Test_Support` for downstream test consumers. |
+| `Order Primitives` | `Sources/Order Primitives/` | The `Order` namespace, all its types, and the `.order` fluent surface. Re-exports `Comparison` so a single `import Order` brings the result types into scope too. |
+| `Order Test Support` | `Tests/Support/` | Re-exports the umbrella plus `Property_Test_Support` for downstream test consumers. |
 
 Order's surface lives under the `Order` namespace enum:
 
@@ -100,8 +100,8 @@ The `Order` enum is the namespace AND the phantom tag for `Property<Order, Base>
 
 Two upstream dependencies:
 
-- [`swift-comparison-primitives`](https://github.com/swift-primitives/swift-comparison-primitives) — provides `Comparison` and `Comparison.\`Protocol\``
-- [`swift-property-primitives`](https://github.com/swift-primitives/swift-property-primitives) — provides `Property<Tag, Base>` and `.Inout`
+- [`swift-comparison`](https://github.com/swift-atoms/swift-comparison) — provides `Comparison` and `Comparison.\`Protocol\``
+- [`swift-property`](https://github.com/swift-atoms/swift-property) — provides `Property<Tag, Base>` and `.Inout`
 
 Foundation-free. No platform conditionals. No concurrency surface in sources beyond the `@Sendable` constraint on stored closures.
 
@@ -149,8 +149,8 @@ The phantom-tag identity of the `Order` namespace enum is part of the public sur
 
 Direct dependencies:
 
-- [swift-comparison-primitives](https://github.com/swift-primitives/swift-comparison-primitives) — `Comparison` and `Comparison.\`Protocol\``
-- [swift-property-primitives](https://github.com/swift-primitives/swift-property-primitives) — `Property<Tag, Base>` and `Property.Inout`
+- [swift-comparison](https://github.com/swift-atoms/swift-comparison) — `Comparison` and `Comparison.\`Protocol\``
+- [swift-property](https://github.com/swift-atoms/swift-property) — `Property<Tag, Base>` and `Property.Inout`
 
 ---
 

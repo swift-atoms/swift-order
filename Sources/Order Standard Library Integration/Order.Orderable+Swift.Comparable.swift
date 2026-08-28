@@ -1,4 +1,4 @@
-public import Order_Orderable_Primitives
+public import Order_Orderable
 
 extension Int: Order.Orderable {}
 
