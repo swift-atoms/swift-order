@@ -97,7 +97,9 @@ let package = Package(
                 .target(name: "Order"),
                 .target(name: "Order Comparator"),
                 .product(name: "Comparison", package: "swift-comparison"),
+                .product(name: "Comparison Protocol", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
+                .product(name: "Property Inout", package: "swift-property"),
             ]
         ),
         .target(
@@ -107,6 +109,7 @@ let package = Package(
                 .target(name: "Order Direction"),
                 .target(name: "Order Comparator"),
                 .product(name: "Comparison", package: "swift-comparison"),
+                .product(name: "Comparison Protocol", package: "swift-comparison"),
             ]
         ),
 
@@ -117,6 +120,7 @@ let package = Package(
                 .target(name: "Order Orderable"),
                 .product(name: "Comparison", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
+                .product(name: "Property Inout", package: "swift-property"),
             ]
         ),
 
@@ -136,7 +140,20 @@ let package = Package(
             name: "Order Tests",
             dependencies: [
                 .target(name: "Order"),
+                .target(name: "Order Comparator"),
+                .target(name: "Order Direction"),
+                .target(name: "Order Orderable"),
+                .target(name: "Order Projection"),
+                .target(name: "Order Standard Library Integration"),
                 .target(name: "Order Test Support"),
+                .product(name: "Comparison", package: "swift-comparison"),
+                .product(name: "Comparison Protocol", package: "swift-comparison"),
+                .product(
+                    name: "Comparison Standard Library Integration",
+                    package: "swift-comparison"
+                ),
+                .product(name: "Property", package: "swift-property"),
+                .product(name: "Property Inout", package: "swift-property"),
             ]
         ),
     ],

@@ -1,8 +1,10 @@
 public import Comparison
+public import Comparison_Protocol
 public import Order_Comparator
 internal import Property
+public import Property_Inout
 
-extension Property.Inout where Tag == Order, Base: ~Copyable {
+extension Property::Property.Inout where Tag == Order, Base: ~Copyable {
 
     @inlinable
     public func isBefore(
@@ -29,7 +31,7 @@ extension Property.Inout where Tag == Order, Base: ~Copyable {
     }
 }
 
-extension Property.Inout
+extension Property::Property.Inout
 where Tag == Order, Base: Comparison.`Protocol` & SendableMetatype & ~Copyable {
 
     @inlinable

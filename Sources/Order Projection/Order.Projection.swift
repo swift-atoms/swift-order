@@ -1,4 +1,6 @@
 public import Comparison
+public import Comparison_Protocol
+public import Order_Comparator
 public import Order_Direction
 
 extension Order {

@@ -1,4 +1,4 @@
-public import Property
+public import Property_Inout
 
 extension Order {
 
@@ -7,9 +7,9 @@ extension Order {
 
 extension Order.Orderable where Self: ~Copyable {
 
-    public var order: Property<Order, Self>.Inout {
+    public var order: Property::Property<Order, Self>.Inout {
         mutating _read {
-            yield Property<Order, Self>.Inout(&self)
+            yield Property::Property<Order, Self>.Inout(&self)
         }
     }
 }
