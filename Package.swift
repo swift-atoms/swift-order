@@ -12,42 +12,10 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-
-        .library(
-            name: "Order Direction",
-            targets: ["Order Direction"]
-        ),
-        .library(
-            name: "Order Monotonicity",
-            targets: ["Order Monotonicity"]
-        ),
-        .library(
-            name: "Order Comparator",
-            targets: ["Order Comparator"]
-        ),
-        .library(
-            name: "Order Orderable",
-            targets: ["Order Orderable"]
-        ),
-        .library(
-            name: "Order Projection",
-            targets: ["Order Projection"]
-        ),
-
-        .library(
-            name: "Order Standard Library Integration",
-            targets: ["Order Standard Library Integration"]
-        ),
-
-        .library(
-            name: "Order",
-            targets: ["Order"]
-        ),
-
-        .library(
-            name: "Order Test Support",
-            targets: ["Order Test Support"]
-        ),
+        .library(name: "Order", targets: ["Order"]),
+        .library(name: "Order Standard Library Integration", targets: ["Order Standard Library Integration"]),
+        .library(name: "Order Foundation Library Integration", targets: ["Order Foundation Library Integration"]),
+        .library(name: "Order Test Support", targets: ["Order Test Support"]),
     ],
     dependencies: [
         .package(
@@ -64,101 +32,59 @@ let package = Package(
         ),
     ],
     targets: [
-
         .target(
             name: "Order",
-            dependencies: []
-        ),
-
-        .target(
-            name: "Order Direction",
             dependencies: [
-                .target(name: "Order")
-            ]
-        ),
-        .target(
-            name: "Order Monotonicity",
-            dependencies: [
-                .target(name: "Order"),
                 .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-        .target(
-            name: "Order Comparator",
-            dependencies: [
-                .target(name: "Order"),
                 .product(name: "Comparison", package: "swift-comparison"),
-                .product(name: "Comparison Protocol", package: "swift-comparison"),
-            ]
-        ),
-        .target(
-            name: "Order Orderable",
-            dependencies: [
-                .target(name: "Order"),
-                .target(name: "Order Comparator"),
-                .product(name: "Comparison", package: "swift-comparison"),
-                .product(name: "Comparison Protocol", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
-            ]
+            ],
+            path: "Sources/Order"
         ),
-        .target(
-            name: "Order Projection",
-            dependencies: [
-                .target(name: "Order"),
-                .target(name: "Order Direction"),
-                .target(name: "Order Comparator"),
-                .product(name: "Comparison", package: "swift-comparison"),
-                .product(name: "Comparison Protocol", package: "swift-comparison"),
-            ]
-        ),
-
         .target(
             name: "Order Standard Library Integration",
             dependencies: [
-                .target(name: "Order Comparator"),
-                .target(name: "Order Orderable"),
+                .target(name: "Order"),
                 .product(name: "Comparison", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
-            ]
+            ],
+            path: "Sources/Order Standard Library Integration"
         ),
-
+        .target(
+            name: "Order Foundation Library Integration",
+            dependencies: [
+                .target(name: "Order"),
+                .target(name: "Order Standard Library Integration"),
+            ],
+            path: "Sources/Order Foundation Library Integration"
+        ),
         .target(
             name: "Order Test Support",
             dependencies: [
                 .target(name: "Order"),
-                .product(
-                    name: "Property Test Support",
-                    package: "swift-property"
-                ),
+                .product(name: "Property Test Support", package: "swift-property"),
             ],
             path: "Tests/Support"
         ),
-
         .testTarget(
             name: "Order Tests",
             dependencies: [
                 .target(name: "Order"),
-                .target(name: "Order Comparator"),
-                .target(name: "Order Direction"),
-                .target(name: "Order Orderable"),
-                .target(name: "Order Projection"),
                 .target(name: "Order Standard Library Integration"),
                 .target(name: "Order Test Support"),
                 .product(name: "Comparison", package: "swift-comparison"),
-                .product(name: "Comparison Protocol", package: "swift-comparison"),
-                .product(
-                    name: "Comparison Standard Library Integration",
-                    package: "swift-comparison"
-                ),
+                .product(name: "Comparison Standard Library Integration", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
-            ]
+                .target(name: "Order Foundation Library Integration"),
+            ],
+            path: "Tests/Order Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -167,8 +93,4 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
     ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }

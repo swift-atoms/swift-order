@@ -1,4 +1,4 @@
-public import Comparison_Protocol
+public import Comparison
 
 extension Order.Comparator where T: Comparison::Comparison.`Protocol` & SendableMetatype & ~Copyable {
 

@@ -1,8 +1,5 @@
 import Comparison
-import Comparison_Protocol
 import Comparison_Standard_Library_Integration
-import Order_Comparator
-import Order_Orderable
 import Order_Standard_Library_Integration
 import Testing
 

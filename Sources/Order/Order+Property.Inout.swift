@@ -1,6 +1,4 @@
 public import Comparison
-public import Comparison_Protocol
-public import Order_Comparator
 public import Property
 
 extension Property::Property.Inout where Tag == Order, Base: ~Copyable {
