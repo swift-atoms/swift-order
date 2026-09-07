@@ -1,6 +1,5 @@
 public import Order_Orderable
-internal import Property
-public import Property_Inout
+public import Property
 
 extension Swift.Comparable where Self: Copyable {
 

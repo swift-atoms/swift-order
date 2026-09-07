@@ -99,7 +99,6 @@ let package = Package(
                 .product(name: "Comparison", package: "swift-comparison"),
                 .product(name: "Comparison Protocol", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
-                .product(name: "Property Inout", package: "swift-property"),
             ]
         ),
         .target(
@@ -120,7 +119,6 @@ let package = Package(
                 .target(name: "Order Orderable"),
                 .product(name: "Comparison", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
-                .product(name: "Property Inout", package: "swift-property"),
             ]
         ),
 
@@ -153,7 +151,6 @@ let package = Package(
                     package: "swift-comparison"
                 ),
                 .product(name: "Property", package: "swift-property"),
-                .product(name: "Property Inout", package: "swift-property"),
             ]
         ),
     ],

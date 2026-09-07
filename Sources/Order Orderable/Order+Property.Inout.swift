@@ -1,8 +1,7 @@
 public import Comparison
 public import Comparison_Protocol
 public import Order_Comparator
-internal import Property
-public import Property_Inout
+public import Property
 
 extension Property::Property.Inout where Tag == Order, Base: ~Copyable {
 
