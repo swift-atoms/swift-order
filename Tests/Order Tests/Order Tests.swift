@@ -5,23 +5,23 @@ import Testing
 @testable import Order
 
 @Suite
-struct `Order Tests` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
-    @Suite(.serialized) struct Performance {}
+struct `Order comparators compose projections directions and partial relations` {
+    @Suite struct `Order operations preserve reversal chaining projection and capability contracts` {}
+    @Suite struct `No order comparator boundary cases are defined` {}
+    @Suite struct `No order comparator integration cases are defined` {}
+    @Suite(.serialized) struct `No order comparator performance cases are defined` {}
 }
 
-extension `Order Tests`.Unit {
-    @Suite struct Direction {}
-    @Suite struct Comparator {}
-    @Suite struct `Comparator Swift.Comparable` {}
-    @Suite struct `Comparator Reversal` {}
-    @Suite struct `Comparator Chaining` {}
-    @Suite struct `Comparator Projection` {}
-    @Suite struct `Partial Comparator` {}
-    @Suite struct `Noncopyable Support` {}
-    @Suite struct Sendability {}
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts` {
+    @Suite struct `Order directions enumerate both orientations and reverse consistently` {}
+    @Suite struct `Comparators invoke their supplied ordering closure` {}
+    @Suite struct `Comparable values support ascending and descending comparators` {}
+    @Suite struct `Reversing comparators exchanges their operand ordering` {}
+    @Suite struct `Comparator chains resolve ties in priority order` {}
+    @Suite struct `Comparator projections order values by selected keys` {}
+    @Suite struct `Partial comparators represent incomparable values explicitly` {}
+    @Suite struct `Comparators borrow noncopyable values and projected keys` {}
+    @Suite struct `Order directions and comparators can cross isolation boundaries` {}
 }
 
 private struct Person {
@@ -60,9 +60,9 @@ extension Holder {
     func get() -> Order.Direction { direction }
 }
 
-extension `Order Tests`.Unit.Direction {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Order directions enumerate both orientations and reverse consistently` {
     @Test
-    func `All cases exist`() {
+    func `Order direction iteration includes ascending and descending`() {
         let cases = Order.Direction.allCases
         #expect(cases.count == 2)
         #expect(cases.contains(.ascending))
@@ -70,22 +70,22 @@ extension `Order Tests`.Unit.Direction {
     }
 
     @Test
-    func `Reversal`() {
+    func `Direction reversal exchanges ascending and descending`() {
         #expect(Order.Direction.ascending.reversed == .descending)
         #expect(Order.Direction.descending.reversed == .ascending)
     }
 
     @Test
-    func `Reversal is involution`() {
+    func `Reversing an order twice restores its original behavior`() {
         for direction in Order.Direction.allCases {
             #expect(direction.reversed.reversed == direction)
         }
     }
 }
 
-extension `Order Tests`.Unit.Comparator {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Comparators invoke their supplied ordering closure` {
     @Test
-    func `Create from closure`() {
+    func `Comparator construction preserves the supplied ordering closure`() {
         let comparator = Order.Comparator<Int> { lhs, rhs in
             Comparison(comparing: lhs, to: rhs)
         }
@@ -96,7 +96,7 @@ extension `Order Tests`.Unit.Comparator {
     }
 
     @Test
-    func `callAsFunction syntax`() {
+    func `Calling a comparator invokes its ordering operation`() {
         let comparator: Order.Comparator<Int> = .ascending
 
         let result = comparator(1, 2)
@@ -104,9 +104,9 @@ extension `Order Tests`.Unit.Comparator {
     }
 }
 
-extension `Order Tests`.Unit.`Comparator Swift.Comparable` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Comparable values support ascending and descending comparators` {
     @Test
-    func `Ascending comparator`() {
+    func `Ascending comparators follow natural value order`() {
         let comparator: Order.Comparator<Int> = .ascending
 
         #expect(comparator(1, 2) == .less)
@@ -115,7 +115,7 @@ extension `Order Tests`.Unit.`Comparator Swift.Comparable` {
     }
 
     @Test
-    func `Descending comparator`() {
+    func `Descending comparators reverse natural value order`() {
         let comparator: Order.Comparator<Int> = .descending
 
         #expect(comparator(1, 2) == .greater)
@@ -124,7 +124,7 @@ extension `Order Tests`.Unit.`Comparator Swift.Comparable` {
     }
 
     @Test
-    func `Swift.Comparable bridging via .ascending`() {
+    func `Ascending comparators bridge standard Comparable values`() {
         let comparator: Order.Comparator<String> = .ascending
 
         #expect(comparator("apple", "banana") == .less)
@@ -133,9 +133,9 @@ extension `Order Tests`.Unit.`Comparator Swift.Comparable` {
     }
 }
 
-extension `Order Tests`.Unit.`Comparator Reversal` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Reversing comparators exchanges their operand ordering` {
     @Test
-    func `Reversed comparator`() {
+    func `Comparator reversal exchanges less and greater results`() {
         let ascending: Order.Comparator<Int> = .ascending
         let reversed = ascending.reversed
 
@@ -145,7 +145,7 @@ extension `Order Tests`.Unit.`Comparator Reversal` {
     }
 
     @Test
-    func `Reversal is involution`() {
+    func `Reversing an order twice restores its original behavior`() {
         let comparator: Order.Comparator<Int> = .ascending
         let doubleReversed = comparator.reversed.reversed
 
@@ -155,9 +155,9 @@ extension `Order Tests`.Unit.`Comparator Reversal` {
     }
 }
 
-extension `Order Tests`.Unit.`Comparator Chaining` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Comparator chains resolve ties in priority order` {
     @Test
-    func `Chain with then`() {
+    func `Comparator chaining resolves equal primary keys with secondary keys`() {
         let byName = Order.Comparator<Person>.by { $0.name }
         let byAge = Order.Comparator<Person>.by { $0.age }
         let comparator = byName.then(byAge)
@@ -174,7 +174,7 @@ extension `Order Tests`.Unit.`Comparator Chaining` {
     }
 
     @Test
-    func `Lazy chaining with then(with:)`() {
+    func `Lazily supplied comparator chains preserve primary ordering results`() {
         let primary = Order.Comparator<Int> { lhs, rhs in
             Comparison(comparing: lhs, to: rhs)
         }
@@ -198,7 +198,7 @@ extension `Order Tests`.Unit.`Comparator Chaining` {
     }
 
     @Test
-    func `Associativity: (a.then(b)).then(c) = a.then(b.then(c))`() {
+    func `Comparator chaining preserves associativity`() {
         struct Triple {
             let x: Int
             let y: Int
@@ -225,9 +225,9 @@ extension `Order Tests`.Unit.`Comparator Chaining` {
     }
 }
 
-extension `Order Tests`.Unit.`Comparator Projection` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Comparator projections order values by selected keys` {
     @Test
-    func `By selector`() {
+    func `Comparator projections order values by their selected keys`() {
         let byAge = Order.Comparator<Person>.by { $0.age }
 
         let alice30 = Person(name: "Alice", age: 30)
@@ -238,7 +238,7 @@ extension `Order Tests`.Unit.`Comparator Projection` {
     }
 
     @Test
-    func `By selector with custom comparator`() {
+    func `Comparator projections apply the supplied key comparator`() {
         let byAgeDescending = Order.Comparator<Person>.by(
             using: .descending
         ) { $0.age }
@@ -251,7 +251,7 @@ extension `Order Tests`.Unit.`Comparator Projection` {
     }
 
     @Test
-    func `Complex composition`() {
+    func `Comparator composition supports reversed secondary projections`() {
         let comparator = Order.Comparator<Person>
             .by { $0.name }
             .then(Order.Comparator<Person>.by { $0.age }.reversed)
@@ -267,9 +267,9 @@ extension `Order Tests`.Unit.`Comparator Projection` {
     }
 }
 
-extension `Order Tests`.Unit.`Partial Comparator` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Partial comparators represent incomparable values explicitly` {
     @Test
-    func `Returns result for comparable values`() {
+    func `Partial comparators return ordered results for comparable values`() {
         let comparator = Order.Comparator<Double>.Partial { lhs, rhs in
             if lhs.isNaN || rhs.isNaN {
                 return nil
@@ -283,7 +283,7 @@ extension `Order Tests`.Unit.`Partial Comparator` {
     }
 
     @Test
-    func `Returns nil for incomparable values`() {
+    func `Partial comparators return nil for incomparable values`() {
         let comparator = Order.Comparator<Double>.Partial { lhs, rhs in
             if lhs.isNaN || rhs.isNaN {
                 return nil
@@ -297,9 +297,9 @@ extension `Order Tests`.Unit.`Partial Comparator` {
     }
 }
 
-extension `Order Tests`.Unit.`Noncopyable Support` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Comparators borrow noncopyable values and projected keys` {
     @Test
-    func `Comparator with ~Copyable type`() {
+    func `Comparators borrow noncopyable values to determine their order`() {
         let comparator = Order.Comparator<Token> { lhs, rhs in
             Comparison(lhs, rhs)
         }
@@ -314,7 +314,7 @@ extension `Order Tests`.Unit.`Noncopyable Support` {
     }
 
     @Test
-    func `Natural ordering for Comparison.Protocol types`() {
+    func `Natural comparators use the comparison protocol ordering`() {
         let comparator: Order.Comparator<Token> = .ascending
 
         let a = Token(id: 5)
@@ -325,7 +325,7 @@ extension `Order Tests`.Unit.`Noncopyable Support` {
     }
 
     @Test
-    func `Key extraction with ~Copyable`() {
+    func `Comparator projections support noncopyable keys`() {
         struct Container: ~Copyable {
             let token: Token
 
@@ -345,7 +345,7 @@ extension `Order Tests`.Unit.`Noncopyable Support` {
     }
 }
 
-extension `Order Tests`.Unit.Sendability {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Order directions and comparators can cross isolation boundaries` {
     @Test
     func `Comparator is Sendable`() async {
         let comparator: Order.Comparator<Int> = .ascending

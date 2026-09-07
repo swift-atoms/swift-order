@@ -5,21 +5,21 @@ import Testing
 @testable import Order
 
 @Suite
-struct `Order Fluent Tests` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
-    @Suite(.serialized) struct Performance {}
+struct `Fluent ordering exposes comparator based relations for values` {
+    @Suite struct `Fluent ordering supports explicit natural and reversed comparators` {}
+    @Suite struct `No fluent order boundary cases are defined` {}
+    @Suite struct `No fluent order integration cases are defined` {}
+    @Suite(.serialized) struct `No fluent order performance cases are defined` {}
 }
 
-extension `Order Fluent Tests`.Unit {
-    @Suite struct `Copyable Types` {}
-    @Suite struct `Noncopyable Types` {}
-    @Suite struct `Comparison.Protocol Convenience` {}
-    @Suite struct `Descending Order` {}
-    @Suite struct `Orderable Protocol` {}
-    @Suite struct `Standard Type Conformances` {}
-    @Suite struct `Swift.Comparable Convenience` {}
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators` {
+    @Suite struct `Copyable values expose comparator based ordering relations` {}
+    @Suite struct `Noncopyable values expose comparator based ordering relations` {}
+    @Suite struct `Comparison protocol values expose natural ordering relations` {}
+    @Suite struct `Descending comparators reverse fluent ordering relations` {}
+    @Suite struct `Orderable values expose an order accessor across copyability constraints` {}
+    @Suite struct `Standard scalar values expose order accessors` {}
+    @Suite struct `Comparable values expose natural ordering convenience methods` {}
 }
 
 private struct Person: Order.Orderable {
@@ -41,9 +41,9 @@ extension Token {
     }
 }
 
-extension `Order Fluent Tests`.Unit.`Copyable Types` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Copyable values expose comparator based ordering relations` {
     @Test
-    func `isBefore with explicit comparator`() {
+    func `Fluent before checks follow the supplied comparator`() {
         var alice = Person(name: "Alice", age: 30)
         var bob = Person(name: "Bob", age: 25)
 
@@ -56,7 +56,7 @@ extension `Order Fluent Tests`.Unit.`Copyable Types` {
     }
 
     @Test
-    func `isAfter with explicit comparator`() {
+    func `Fluent after checks follow the supplied comparator`() {
         var alice = Person(name: "Alice", age: 30)
         var bob = Person(name: "Bob", age: 25)
 
@@ -69,7 +69,7 @@ extension `Order Fluent Tests`.Unit.`Copyable Types` {
     }
 
     @Test
-    func `isEquivalent with explicit comparator`() {
+    func `Fluent equivalence checks follow the supplied comparator`() {
         var alice = Person(name: "Alice", age: 30)
         let carol = Person(name: "Carol", age: 30)
         let bob = Person(name: "Bob", age: 25)
@@ -83,7 +83,7 @@ extension `Order Fluent Tests`.Unit.`Copyable Types` {
     }
 
     @Test
-    func `Multiple comparators on same type`() {
+    func `Different comparators can impose different orders on the same values`() {
         var alice = Person(name: "Alice", age: 30)
         let bob = Person(name: "Bob", age: 25)
 
@@ -100,9 +100,9 @@ extension `Order Fluent Tests`.Unit.`Copyable Types` {
     }
 }
 
-extension `Order Fluent Tests`.Unit.`Noncopyable Types` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Noncopyable values expose comparator based ordering relations` {
     @Test
-    func `isBefore with explicit comparator`() {
+    func `Fluent before checks follow the supplied comparator`() {
         var a = Token(id: 5)
         var b = Token(id: 10)
 
@@ -113,7 +113,7 @@ extension `Order Fluent Tests`.Unit.`Noncopyable Types` {
     }
 
     @Test
-    func `isAfter with explicit comparator`() {
+    func `Fluent after checks follow the supplied comparator`() {
         var a = Token(id: 5)
         var b = Token(id: 10)
 
@@ -124,7 +124,7 @@ extension `Order Fluent Tests`.Unit.`Noncopyable Types` {
     }
 
     @Test
-    func `isEquivalent with explicit comparator`() {
+    func `Fluent equivalence checks follow the supplied comparator`() {
         var a = Token(id: 5)
         let b = Token(id: 10)
         let c = Token(id: 5)
@@ -136,9 +136,9 @@ extension `Order Fluent Tests`.Unit.`Noncopyable Types` {
     }
 }
 
-extension `Order Fluent Tests`.Unit.`Comparison.Protocol Convenience` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Comparison protocol values expose natural ordering relations` {
     @Test
-    func `isBefore without explicit comparator`() {
+    func `Fluent before checks use the natural comparison`() {
         var a = Token(id: 5)
         var b = Token(id: 10)
 
@@ -147,7 +147,7 @@ extension `Order Fluent Tests`.Unit.`Comparison.Protocol Convenience` {
     }
 
     @Test
-    func `isAfter without explicit comparator`() {
+    func `Fluent after checks use the natural comparison`() {
         var a = Token(id: 5)
         var b = Token(id: 10)
 
@@ -156,7 +156,7 @@ extension `Order Fluent Tests`.Unit.`Comparison.Protocol Convenience` {
     }
 
     @Test
-    func `isEquivalent without explicit comparator`() {
+    func `Fluent equivalence checks use the natural comparison`() {
         var a = Token(id: 5)
         let b = Token(id: 10)
         let c = Token(id: 5)
@@ -166,9 +166,9 @@ extension `Order Fluent Tests`.Unit.`Comparison.Protocol Convenience` {
     }
 }
 
-extension `Order Fluent Tests`.Unit.`Descending Order` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Descending comparators reverse fluent ordering relations` {
     @Test
-    func `isBefore with descending comparator`() {
+    func `Descending comparison reverses fluent before checks`() {
         var a = Token(id: 5)
         var b = Token(id: 10)
 
@@ -179,7 +179,7 @@ extension `Order Fluent Tests`.Unit.`Descending Order` {
     }
 
     @Test
-    func `isAfter with descending comparator`() {
+    func `Descending comparison reverses fluent after checks`() {
         var a = Token(id: 5)
         var b = Token(id: 10)
 
@@ -190,7 +190,7 @@ extension `Order Fluent Tests`.Unit.`Descending Order` {
     }
 }
 
-extension `Order Fluent Tests`.Unit.`Orderable Protocol` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Orderable values expose an order accessor across copyability constraints` {
     @Test
     func `Type conforming to Orderable gets .order property`() {
         struct Sample: Order.Orderable {
@@ -224,7 +224,7 @@ extension `Order Fluent Tests`.Unit.`Orderable Protocol` {
     }
 }
 
-extension `Order Fluent Tests`.Unit.`Standard Type Conformances` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Standard scalar values expose order accessors` {
     @Test
     func `Int has .order property`() {
         var a = 5
@@ -266,7 +266,7 @@ extension `Order Fluent Tests`.Unit.`Standard Type Conformances` {
     }
 }
 
-extension `Order Fluent Tests`.Unit.`Swift.Comparable Convenience` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Comparable values expose natural ordering convenience methods` {
     @Test
     func `String has convenience methods without explicit comparator`() {
         var apple = "apple"
