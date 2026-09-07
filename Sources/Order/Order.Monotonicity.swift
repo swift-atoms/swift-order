@@ -78,5 +78,5 @@ extension Order.Monotonicity {
 }
 
 #if !hasFeature(Embedded)
-    extension Order.Monotonicity: Codable {}
+extension Order.Monotonicity: Swift.Codable {}
 #endif

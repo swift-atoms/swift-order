@@ -13,8 +13,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Order", targets: ["Order"]),
-        .library(name: "Order Standard Library Integration", targets: ["Order Standard Library Integration"]),
-        .library(name: "Order Foundation Library Integration", targets: ["Order Foundation Library Integration"]),
+
+        .library(name: "Order Foundation Integration", targets: ["Order Foundation Integration"]),
         .library(name: "Order Test Support", targets: ["Order Test Support"]),
     ],
     dependencies: [
@@ -41,22 +41,13 @@ let package = Package(
             ],
             path: "Sources/Order"
         ),
+        
         .target(
-            name: "Order Standard Library Integration",
+            name: "Order Foundation Integration",
             dependencies: [
                 .target(name: "Order"),
-                .product(name: "Comparison", package: "swift-comparison"),
-                .product(name: "Property", package: "swift-property"),
             ],
-            path: "Sources/Order Standard Library Integration"
-        ),
-        .target(
-            name: "Order Foundation Library Integration",
-            dependencies: [
-                .target(name: "Order"),
-                .target(name: "Order Standard Library Integration"),
-            ],
-            path: "Sources/Order Foundation Library Integration"
+            path: "Sources/Order Foundation Integration"
         ),
         .target(
             name: "Order Test Support",
@@ -70,12 +61,10 @@ let package = Package(
             name: "Order Tests",
             dependencies: [
                 .target(name: "Order"),
-                .target(name: "Order Standard Library Integration"),
                 .target(name: "Order Test Support"),
                 .product(name: "Comparison", package: "swift-comparison"),
-                .product(name: "Comparison Standard Library Integration", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
-                .target(name: "Order Foundation Library Integration"),
+                .target(name: "Order Foundation Integration"),
             ],
             path: "Tests/Order Tests"
         ),

@@ -1,6 +1,5 @@
 import Comparison
-import Comparison_Standard_Library_Integration
-import Order_Standard_Library_Integration
+import Order
 import Testing
 
 @testable import Order

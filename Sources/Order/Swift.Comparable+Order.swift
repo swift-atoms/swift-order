@@ -1,4 +1,3 @@
-public import Order
 public import Property
 
 extension Swift.Comparable where Self: Copyable {
