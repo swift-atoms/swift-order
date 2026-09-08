@@ -18,6 +18,7 @@ let package = Package(
         .library(name: "Order Test Support", targets: ["Order Test Support"]),
     ],
     dependencies: [
+
         .package(
             url: "https://github.com/swift-atoms/swift-comparison.git",
             branch: "main"
@@ -67,6 +68,15 @@ let package = Package(
                 .target(name: "Order Foundation Integration"),
             ],
             path: "Tests/Order Tests"
+        ),
+        .testTarget(
+            name: "Consolidated Order Comparison Tests",
+            dependencies: [
+
+                .target(name: "Order"),
+                .product(name: "Comparison", package: "swift-comparison"),
+            ],
+            path: "Tests/Consolidated swift-order-comparison"
         ),
     ],
     swiftLanguageModes: [.v6]
