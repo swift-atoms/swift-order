@@ -74,7 +74,7 @@ extension Order.Monotonicity {
 
 extension Order.Monotonicity {
 
-    public typealias Value<Payload> = Pair<Order.Monotonicity, Payload>
+    public typealias Value<Payload: ~Copyable & ~Escapable> = Pair<Order.Monotonicity, Payload>
 }
 
 #if !hasFeature(Embedded)
