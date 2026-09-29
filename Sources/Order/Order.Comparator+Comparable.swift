@@ -1,11 +1,10 @@
-public import Comparison
 
-extension Order.Comparator where T: Comparison::Comparison.`Protocol` & SendableMetatype & ~Copyable {
+extension Order.Comparator where T: Swift.Comparable & SendableMetatype & ~Copyable {
 
     @inlinable
     public init() {
         self.init { lhs, rhs in
-            Comparison(lhs, rhs)
+            Order.Comparison(lhs, rhs)
         }
     }
 

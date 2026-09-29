@@ -2,7 +2,6 @@
 
 import Testing
 
-import Comparison
 import Order
 
 @Suite
@@ -28,7 +27,7 @@ private struct Person: Order.Orderable {
     let age: Int
 }
 
-private struct Token: ~Copyable, Order.Orderable, Comparison.`Protocol` {
+private struct Token: ~Copyable, Order.Orderable, Swift.Comparable {
     let id: Int
 }
 
@@ -49,7 +48,7 @@ extension `Order Property Tests`.Unit.`Copyable Types` {
         var bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
-            Comparison(lhs.age, rhs.age)
+            Order.Comparison(lhs.age, rhs.age)
         }
 
         #expect(alice.ordered().isBefore(bob, by: byAge) == false)
@@ -62,7 +61,7 @@ extension `Order Property Tests`.Unit.`Copyable Types` {
         var bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
-            Comparison(lhs.age, rhs.age)
+            Order.Comparison(lhs.age, rhs.age)
         }
 
         #expect(alice.ordered().isAfter(bob, by: byAge) == true)
@@ -76,7 +75,7 @@ extension `Order Property Tests`.Unit.`Copyable Types` {
         let bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
-            Comparison(lhs.age, rhs.age)
+            Order.Comparison(lhs.age, rhs.age)
         }
 
         #expect(alice.ordered().isEquivalent(to: carol, by: byAge) == true)
@@ -89,10 +88,10 @@ extension `Order Property Tests`.Unit.`Copyable Types` {
         let bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
-            Comparison(lhs.age, rhs.age)
+            Order.Comparison(lhs.age, rhs.age)
         }
         let byName = Order.Comparator<Person> { lhs, rhs in
-            Comparison(lhs.name, rhs.name)
+            Order.Comparison(lhs.name, rhs.name)
         }
 
         #expect(alice.ordered().isAfter(bob, by: byAge) == true)
@@ -176,7 +175,7 @@ extension `Order Property Tests`.Unit.`Orderable Protocol` {
         let other = Sample(x: 5)
 
         let comparator = Order.Comparator<Sample> { lhs, rhs in
-            Comparison(lhs.x, rhs.x)
+            Order.Comparison(lhs.x, rhs.x)
         }
 
         #expect(value.ordered().isAfter(other, by: comparator) == true)
@@ -192,7 +191,7 @@ extension `Order Property Tests`.Unit.`Orderable Protocol` {
         let low = Resource(priority: 1)
 
         let byPriority = Order.Comparator<Resource> { lhs, rhs in
-            Comparison(lhs.priority, rhs.priority)
+            Order.Comparison(lhs.priority, rhs.priority)
         }
 
         #expect(high.ordered().isAfter(low, by: byPriority) == true)

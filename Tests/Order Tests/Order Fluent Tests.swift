@@ -1,4 +1,4 @@
-import Comparison
+
 import Order
 import Testing
 
@@ -27,7 +27,7 @@ private struct Person: Order.Orderable {
     let age: Int
 }
 
-private struct Token: ~Copyable, Order.Orderable, Comparison.`Protocol` {
+private struct Token: ~Copyable, Order.Orderable, Swift.Comparable {
     let id: Int
 }
 
@@ -48,7 +48,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
         var bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
-            Comparison(comparing: lhs.age, to: rhs.age)
+            Order.Comparison(lhs.age, rhs.age)
         }
 
         #expect(alice.order.isBefore(bob, by: byAge) == false)
@@ -61,7 +61,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
         var bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
-            Comparison(comparing: lhs.age, to: rhs.age)
+            Order.Comparison(lhs.age, rhs.age)
         }
 
         #expect(alice.order.isAfter(bob, by: byAge) == true)
@@ -75,7 +75,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
         let bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
-            Comparison(comparing: lhs.age, to: rhs.age)
+            Order.Comparison(lhs.age, rhs.age)
         }
 
         #expect(alice.order.isEquivalent(to: carol, by: byAge) == true)
@@ -88,10 +88,10 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
         let bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
-            Comparison(comparing: lhs.age, to: rhs.age)
+            Order.Comparison(lhs.age, rhs.age)
         }
         let byName = Order.Comparator<Person> { lhs, rhs in
-            Comparison(comparing: lhs.name, to: rhs.name)
+            Order.Comparison(lhs.name, rhs.name)
         }
 
         #expect(alice.order.isAfter(bob, by: byAge) == true)
@@ -201,7 +201,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
         let other = Sample(x: 5)
 
         let comparator = Order.Comparator<Sample> { lhs, rhs in
-            Comparison(comparing: lhs.x, to: rhs.x)
+            Order.Comparison(lhs.x, rhs.x)
         }
 
         #expect(value.order.isAfter(other, by: comparator) == true)
@@ -217,7 +217,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
         let low = Resource(priority: 1)
 
         let byPriority = Order.Comparator<Resource> { lhs, rhs in
-            Comparison(comparing: lhs.priority, to: rhs.priority)
+            Order.Comparison(lhs.priority, rhs.priority)
         }
 
         #expect(high.order.isAfter(low, by: byPriority) == true)

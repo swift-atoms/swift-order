@@ -1,10 +1,9 @@
-public import Comparison
 
 extension Order {
 
     public struct Projection<
         Root: ~Copyable,
-        Value: Comparison.`Protocol` & SendableMetatype & ~Copyable
+        Value: Swift.Comparable & SendableMetatype & ~Copyable
     >: Sendable {
 
         @usableFromInline
@@ -24,7 +23,7 @@ extension Order {
     }
 }
 
-extension Order.Projection where Root: ~Copyable, Value: Comparison.`Protocol` & ~Copyable {
+extension Order.Projection where Root: ~Copyable, Value: Swift.Comparable & ~Copyable {
 
     @inlinable
     public var reversed: Self {

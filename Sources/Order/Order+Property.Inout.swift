@@ -1,4 +1,4 @@
-public import Comparison
+
 public import Property
 
 extension Property::Property.Inout where Tag == Order, Base: ~Copyable {
@@ -29,7 +29,7 @@ extension Property::Property.Inout where Tag == Order, Base: ~Copyable {
 }
 
 extension Property::Property.Inout
-where Tag == Order, Base: Comparison.`Protocol` & SendableMetatype & ~Copyable {
+where Tag == Order, Base: Swift.Comparable & SendableMetatype & ~Copyable {
 
     @inlinable
     public func isBefore(_ other: borrowing Base) -> Bool {

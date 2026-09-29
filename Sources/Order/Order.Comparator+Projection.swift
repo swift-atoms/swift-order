@@ -1,13 +1,12 @@
-public import Comparison
 
 extension Order.Comparator where T: ~Copyable {
 
     @inlinable
-    public static func by<Value: Comparison::Comparison.`Protocol` & SendableMetatype & ~Copyable>(
+    public static func by<Value: Swift.Comparable & SendableMetatype & ~Copyable>(
         _ selector: @escaping @Sendable (borrowing T) -> Value
     ) -> Order.Comparator<T> {
         return Order.Comparator { lhs, rhs in
-            Comparison(selector(lhs), selector(rhs))
+            Order.Comparison(selector(lhs), selector(rhs))
         }
     }
 

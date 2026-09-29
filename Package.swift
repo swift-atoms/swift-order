@@ -27,11 +27,6 @@ let package = Package(
         .package(url: "https://github.com/swift-atoms/swift-index.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-finite.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-cardinal.git", branch: "main"),
-
-        .package(
-            url: "https://github.com/swift-atoms/swift-comparison.git",
-            branch: "main"
-        ),
         .package(
             url: "https://github.com/swift-atoms/swift-property.git",
             branch: "main"
@@ -51,7 +46,6 @@ let package = Package(
                 .product(name: "Finite", package: "swift-finite", condition: .when(traits: ["Finite"])),
                 .product(name: "Cardinal", package: "swift-cardinal", condition: .when(traits: ["Finite"])),
                 .product(name: "Pair", package: "swift-pair"),
-                .product(name: "Comparison", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
             ],
             path: "Sources/Order"
@@ -77,7 +71,6 @@ let package = Package(
             dependencies: [
                 .target(name: "Order"),
                 .target(name: "Order Test Support"),
-                .product(name: "Comparison", package: "swift-comparison"),
                 .product(name: "Property", package: "swift-property"),
                 .target(name: "Order Foundation Integration"),
             ],
@@ -88,7 +81,6 @@ let package = Package(
             dependencies: [
 
                 .target(name: "Order"),
-                .product(name: "Comparison", package: "swift-comparison"),
             ],
             path: "Tests/Consolidated swift-order-comparison"
         ),
@@ -107,7 +99,6 @@ let package = Package(
         ),
         .testTarget(name: "Order Owned Property Migration Tests", dependencies: [
             .target(name: "Order"),
-            .product(name: "Comparison", package: "swift-comparison", condition: .when(traits: ["Property"])),
             .product(name: "Property", package: "swift-property", condition: .when(traits: ["Property"])),
         ], path: "Tests/Order Owned Property Migration Tests"),
     ],

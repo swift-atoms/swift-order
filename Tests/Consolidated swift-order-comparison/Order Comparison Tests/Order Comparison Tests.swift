@@ -1,6 +1,5 @@
 import Testing
 
-import Comparison
 import Order
 
 @testable import Order
@@ -29,7 +28,7 @@ private struct Person {
     let age: Int
 }
 
-private struct Token: ~Copyable, Comparison.`Protocol` {
+private struct Token: ~Copyable, Swift.Comparable {
     let id: Int
 }
 
@@ -46,7 +45,7 @@ extension Token {
 private actor Comparer {}
 
 extension Comparer {
-    func compare(with comparator: Order.Comparator<Int>) -> Comparison {
+    func compare(with comparator: Order.Comparator<Int>) -> Order.Comparison {
         comparator(1, 2)
     }
 }
@@ -55,7 +54,7 @@ extension `Order Comparison Tests`.Unit.Comparator {
     @Test
     func `Create from closure`() {
         let comparator = Order.Comparator<Int> { lhs, rhs in
-            Comparison(lhs, rhs)
+            Order.Comparison(lhs, rhs)
         }
 
         #expect(comparator(1, 2) == .less)
@@ -144,7 +143,7 @@ extension `Order Comparison Tests`.Unit.`Comparator Chaining` {
     @Test
     func `Lazy chaining with then(with:)`() {
         let primary = Order.Comparator<Int> { lhs, rhs in
-            Comparison(lhs, rhs)
+            Order.Comparison(lhs, rhs)
         }
 
         let secondary: @Sendable () -> Order.Comparator<Int> = {
@@ -242,7 +241,7 @@ extension `Order Comparison Tests`.Unit.`Partial Comparator` {
             if lhs.isNaN || rhs.isNaN {
                 return nil
             }
-            return Comparison(lhs, rhs)
+            return Order.Comparison(lhs, rhs)
         }
 
         #expect(comparator(1.0, 2.0) == .less)
@@ -256,7 +255,7 @@ extension `Order Comparison Tests`.Unit.`Partial Comparator` {
             if lhs.isNaN || rhs.isNaN {
                 return nil
             }
-            return Comparison(lhs, rhs)
+            return Order.Comparison(lhs, rhs)
         }
 
         #expect(comparator(Double.nan, 1.0) == nil)
@@ -269,7 +268,7 @@ extension `Order Comparison Tests`.Unit.`Noncopyable Support` {
     @Test
     func `Comparator with ~Copyable type`() {
         let comparator = Order.Comparator<Token> { lhs, rhs in
-            Comparison(lhs, rhs)
+            Order.Comparison(lhs, rhs)
         }
 
         let a = Token(id: 1)
@@ -304,7 +303,7 @@ extension `Order Comparison Tests`.Unit.`Noncopyable Support` {
 
         let byToken = Order.Comparator<Container>.by(
             using: .ascending
-        ) { Comparison($0.token.id, 0).isGreater ? $0.token.id : 0 }
+        ) { Order.Comparison($0.token.id, 0).isGreater ? $0.token.id : 0 }
 
         let a = Container(tokenId: 5)
         let b = Container(tokenId: 10)
