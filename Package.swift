@@ -89,10 +89,6 @@ let package = Package(
             ],
             path: "Tests/Order Finite Tests"
         ),
-        .testTarget(name: "Order Owned Property Migration Tests", dependencies: [
-            .target(name: "Order"),
-            .product(name: "Property", package: "swift-property", condition: .when(traits: ["Property"])),
-        ], path: "Tests/Order Owned Property Migration Tests"),
     ],
     swiftLanguageModes: [.v6]
 )
