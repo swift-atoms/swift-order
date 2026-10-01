@@ -77,14 +77,6 @@ let package = Package(
             path: "Tests/Order Tests"
         ),
         .testTarget(
-            name: "Consolidated Order Comparison Tests",
-            dependencies: [
-
-                .target(name: "Order"),
-            ],
-            path: "Tests/Consolidated swift-order-comparison"
-        ),
-        .testTarget(
             name: "Order Finite Tests",
             dependencies: [
                 .target(name: "Order"),
