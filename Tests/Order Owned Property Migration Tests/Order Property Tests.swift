@@ -44,8 +44,8 @@ extension Token {
 extension `Order Property Tests`.Unit.`Copyable Types` {
     @Test
     func `isBefore with explicit comparator`() {
-        var alice = Person(name: "Alice", age: 30)
-        var bob = Person(name: "Bob", age: 25)
+        let alice = Person(name: "Alice", age: 30)
+        let bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
             Order.Comparison(lhs.age, rhs.age)
@@ -57,8 +57,8 @@ extension `Order Property Tests`.Unit.`Copyable Types` {
 
     @Test
     func `isAfter with explicit comparator`() {
-        var alice = Person(name: "Alice", age: 30)
-        var bob = Person(name: "Bob", age: 25)
+        let alice = Person(name: "Alice", age: 30)
+        let bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
             Order.Comparison(lhs.age, rhs.age)
@@ -70,7 +70,7 @@ extension `Order Property Tests`.Unit.`Copyable Types` {
 
     @Test
     func `isEquivalent with explicit comparator`() {
-        var alice = Person(name: "Alice", age: 30)
+        let alice = Person(name: "Alice", age: 30)
         let carol = Person(name: "Carol", age: 30)
         let bob = Person(name: "Bob", age: 25)
 
@@ -84,7 +84,7 @@ extension `Order Property Tests`.Unit.`Copyable Types` {
 
     @Test
     func `Multiple comparators on same type`() {
-        var alice = Person(name: "Alice", age: 30)
+        let alice = Person(name: "Alice", age: 30)
         let bob = Person(name: "Bob", age: 25)
 
         let byAge = Order.Comparator<Person> { lhs, rhs in
@@ -171,7 +171,7 @@ extension `Order Property Tests`.Unit.`Orderable Protocol` {
             let x: Int
         }
 
-        var value = Sample(x: 10)
+        let value = Sample(x: 10)
         let other = Sample(x: 5)
 
         let comparator = Order.Comparator<Sample> { lhs, rhs in
@@ -187,7 +187,7 @@ extension `Order Property Tests`.Unit.`Orderable Protocol` {
             let priority: Int
         }
 
-        var high = Resource(priority: 10)
+        let high = Resource(priority: 10)
         let low = Resource(priority: 1)
 
         let byPriority = Order.Comparator<Resource> { lhs, rhs in
@@ -201,7 +201,7 @@ extension `Order Property Tests`.Unit.`Orderable Protocol` {
 extension `Order Property Tests`.Unit.`Standard Type Conformances` {
     @Test
     func `Int has .ordered() property`() {
-        var a = 5
+        let a = 5
         let b = 10
 
         #expect(a.ordered().isBefore(b) == true)
@@ -210,7 +210,7 @@ extension `Order Property Tests`.Unit.`Standard Type Conformances` {
 
     @Test
     func `String has .ordered() property with explicit comparator`() {
-        var apple = "apple"
+        let apple = "apple"
         let banana = "banana"
 
         let comparator: Order.Comparator<String> = .ascending
@@ -221,7 +221,7 @@ extension `Order Property Tests`.Unit.`Standard Type Conformances` {
 
     @Test
     func `Double has .ordered() property with explicit comparator`() {
-        var a = 1.5
+        let a = 1.5
         let b = 2.5
 
         let comparator: Order.Comparator<Double> = .ascending
@@ -232,7 +232,7 @@ extension `Order Property Tests`.Unit.`Standard Type Conformances` {
 
     @Test
     func `UInt8 has .ordered() property with convenience methods`() {
-        var a: UInt8 = 100
+        let a: UInt8 = 100
         let b: UInt8 = 200
 
         #expect(a.ordered().isBefore(b) == true)
@@ -243,7 +243,7 @@ extension `Order Property Tests`.Unit.`Standard Type Conformances` {
 extension `Order Property Tests`.Unit.`Swift.Comparable Convenience` {
     @Test
     func `String has convenience methods without explicit comparator`() {
-        var apple = "apple"
+        let apple = "apple"
         let banana = "banana"
 
         #expect(apple.ordered().isBefore(banana) == true)
@@ -253,7 +253,7 @@ extension `Order Property Tests`.Unit.`Swift.Comparable Convenience` {
 
     @Test
     func `Double has convenience methods without explicit comparator`() {
-        var a = 1.5
+        let a = 1.5
         let b = 2.5
 
         #expect(a.ordered().isBefore(b) == true)
@@ -263,7 +263,7 @@ extension `Order Property Tests`.Unit.`Swift.Comparable Convenience` {
 
     @Test
     func `Float has convenience methods`() {
-        var a: Float = 3.14
+        let a: Float = 3.14
         let b: Float = 2.71
 
         #expect(a.ordered().isBefore(b) == false)
@@ -272,7 +272,7 @@ extension `Order Property Tests`.Unit.`Swift.Comparable Convenience` {
 
     @Test
     func `Character has convenience methods`() {
-        var a: Character = "a"
+        let a: Character = "a"
         let z: Character = "z"
 
         #expect(a.ordered().isBefore(z) == true)

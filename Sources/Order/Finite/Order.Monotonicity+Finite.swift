@@ -1,9 +1,9 @@
 #if Finite
 public import Cardinal
 public import Finite
-public import Index
+import Index
 public import Ordinal
-public import Tagged
+import Tagged
 
 extension Order.Monotonicity: Finite.Enumerable {
 
