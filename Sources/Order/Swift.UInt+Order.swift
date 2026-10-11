@@ -1,1 +1,1 @@
-extension Swift.UInt: Order.Orderable {}
+extension Swift::UInt: Order.Orderable {}

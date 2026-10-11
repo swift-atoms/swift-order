@@ -1,1 +1,1 @@
-extension Swift.Character: Order.Orderable {}
+extension Swift::Character: Order.Orderable {}

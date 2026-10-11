@@ -29,7 +29,7 @@ private struct Person {
     let age: Int
 }
 
-private struct Token: ~Copyable, Swift.Comparable {
+private struct Token: ~Copyable, Swift::Comparable {
     let id: Int
 }
 

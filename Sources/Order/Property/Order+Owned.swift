@@ -6,7 +6,7 @@ extension Order.Orderable where Self: ~Copyable {
     public consuming func ordered() -> Property<Order, Self> { Property(consume self) }
 }
 
-extension Swift.Comparable where Self: ~Copyable {
+extension Swift::Comparable where Self: ~Copyable {
     @_disfavoredOverload
     @inlinable
     public consuming func ordered() -> Property<Order, Self> { Property(consume self) }

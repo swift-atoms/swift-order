@@ -1,5 +1,5 @@
 
-extension Order.Comparator where T: Swift.Comparable & SendableMetatype & ~Copyable {
+extension Order.Comparator where T: Swift::Comparable & SendableMetatype & ~Copyable {
 
     @inlinable
     public init() {

@@ -1,1 +1,1 @@
-extension Swift.Double: Order.Orderable {}
+extension Swift::Double: Order.Orderable {}

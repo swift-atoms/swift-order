@@ -1,1 +1,1 @@
-extension Swift.Float: Order.Orderable {}
+extension Swift::Float: Order.Orderable {}

@@ -27,7 +27,7 @@ private struct Person: Order.Orderable {
     let age: Int
 }
 
-private struct Token: ~Copyable, Order.Orderable, Swift.Comparable {
+private struct Token: ~Copyable, Order.Orderable, Swift::Comparable {
     let id: Int
 }
 

@@ -1,6 +1,6 @@
 public import Property
 
-extension Swift.Comparable where Self: Copyable {
+extension Swift::Comparable where Self: Copyable {
 
     @_disfavoredOverload
     public var order: Property::Property<Order, Self>.Inout {

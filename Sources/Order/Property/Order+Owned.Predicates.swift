@@ -30,7 +30,7 @@ extension Property where Tag == Order, Base: ~Copyable {
 }
 
 extension Property
-where Tag == Order, Base: Swift.Comparable & SendableMetatype & ~Copyable {
+where Tag == Order, Base: Swift::Comparable & SendableMetatype & ~Copyable {
 
     @inlinable
     public func isBefore(_ other: borrowing Base) -> Bool {

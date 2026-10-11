@@ -1,1 +1,1 @@
-extension Swift.Int32: Order.Orderable {}
+extension Swift::Int32: Order.Orderable {}

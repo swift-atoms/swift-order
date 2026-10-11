@@ -1,7 +1,7 @@
 extension Order.Comparison {
 
     @inlinable
-    public init<T: Swift.Comparable & ~Copyable>(_ lhs: borrowing T, _ rhs: borrowing T) {
+    public init<T: Swift::Comparable & ~Copyable>(_ lhs: borrowing T, _ rhs: borrowing T) {
         if lhs < rhs {
             self = .less
         } else if lhs > rhs {
