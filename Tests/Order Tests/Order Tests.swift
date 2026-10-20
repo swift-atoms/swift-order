@@ -1,4 +1,3 @@
-
 import Order
 import Testing
 
@@ -60,7 +59,9 @@ extension Holder {
     func get() -> Order.Direction { direction }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Order directions enumerate both orientations and reverse consistently` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+    .`Order directions enumerate both orientations and reverse consistently`
+{
     @Test
     func `Order direction iteration includes ascending and descending`() {
         let cases = Order.Direction.allCases
@@ -83,7 +84,9 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Comparators invoke their supplied ordering closure` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+    .`Comparators invoke their supplied ordering closure`
+{
     @Test
     func `Comparator construction preserves the supplied ordering closure`() {
         let comparator = Order.Comparator<Int> { lhs, rhs in
@@ -104,7 +107,9 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Comparable values support ascending and descending comparators` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+    .`Comparable values support ascending and descending comparators`
+{
     @Test
     func `Ascending comparators follow natural value order`() {
         let comparator: Order.Comparator<Int> = .ascending
@@ -133,7 +138,9 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Reversing comparators exchanges their operand ordering` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+    .`Reversing comparators exchanges their operand ordering`
+{
     @Test
     func `Comparator reversal exchanges less and greater results`() {
         let ascending: Order.Comparator<Int> = .ascending
@@ -155,7 +162,9 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Comparator chains resolve ties in priority order` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+    .`Comparator chains resolve ties in priority order`
+{
     @Test
     func `Comparator chaining resolves equal primary keys with secondary keys`() {
         let byName = Order.Comparator<Person>.by { $0.name }
@@ -225,7 +234,9 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Comparator projections order values by selected keys` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+    .`Comparator projections order values by selected keys`
+{
     @Test
     func `Comparator projections order values by their selected keys`() {
         let byAge = Order.Comparator<Person>.by { $0.age }
@@ -267,7 +278,9 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Partial comparators represent incomparable values explicitly` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+    .`Partial comparators represent incomparable values explicitly`
+{
     @Test
     func `Partial comparators return ordered results for comparable values`() {
         let comparator = Order.Comparator<Double>.Partial { lhs, rhs in
@@ -297,7 +310,9 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Comparators borrow noncopyable values and projected keys` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+    .`Comparators borrow noncopyable values and projected keys`
+{
     @Test
     func `Comparators borrow noncopyable values to determine their order`() {
         let comparator = Order.Comparator<Token> { lhs, rhs in
@@ -345,7 +360,9 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`.`Order directions and comparators can cross isolation boundaries` {
+extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+    .`Order directions and comparators can cross isolation boundaries`
+{
     @Test
     func `Comparator is Sendable`() async {
         let comparator: Order.Comparator<Int> = .ascending

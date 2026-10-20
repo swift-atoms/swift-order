@@ -1,4 +1,3 @@
-
 extension Order.Comparator {
 
     public struct Partial: Sendable {

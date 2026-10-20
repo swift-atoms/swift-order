@@ -1,4 +1,3 @@
-
 extension Order.Comparator where T: ~Copyable {
 
     @inlinable

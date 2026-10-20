@@ -1,50 +1,50 @@
 #if Property
 
-public import Property
+    public import Property
 
-extension Property where Tag == Order, Base: ~Copyable {
+    extension Property where Tag == Order, Base: ~Copyable {
 
-    @inlinable
-    public func isBefore(
-        _ other: borrowing Base,
-        by comparator: Order.Comparator<Base>
-    ) -> Bool {
-        comparator(base, other).isLess
+        @inlinable
+        public func isBefore(
+            _ other: borrowing Base,
+            by comparator: Order.Comparator<Base>
+        ) -> Bool {
+            comparator(base, other).isLess
+        }
+
+        @inlinable
+        public func isAfter(
+            _ other: borrowing Base,
+            by comparator: Order.Comparator<Base>
+        ) -> Bool {
+            comparator(base, other).isGreater
+        }
+
+        @inlinable
+        public func isEquivalent(
+            to other: borrowing Base,
+            by comparator: Order.Comparator<Base>
+        ) -> Bool {
+            comparator(base, other).isEqual
+        }
     }
 
-    @inlinable
-    public func isAfter(
-        _ other: borrowing Base,
-        by comparator: Order.Comparator<Base>
-    ) -> Bool {
-        comparator(base, other).isGreater
-    }
+    extension Property
+    where Tag == Order, Base: Swift::Comparable & SendableMetatype & ~Copyable {
 
-    @inlinable
-    public func isEquivalent(
-        to other: borrowing Base,
-        by comparator: Order.Comparator<Base>
-    ) -> Bool {
-        comparator(base, other).isEqual
-    }
-}
+        @inlinable
+        public func isBefore(_ other: borrowing Base) -> Bool {
+            isBefore(other, by: .ascending)
+        }
 
-extension Property
-where Tag == Order, Base: Swift::Comparable & SendableMetatype & ~Copyable {
+        @inlinable
+        public func isAfter(_ other: borrowing Base) -> Bool {
+            isAfter(other, by: .ascending)
+        }
 
-    @inlinable
-    public func isBefore(_ other: borrowing Base) -> Bool {
-        isBefore(other, by: .ascending)
+        @inlinable
+        public func isEquivalent(to other: borrowing Base) -> Bool {
+            isEquivalent(to: other, by: .ascending)
+        }
     }
-
-    @inlinable
-    public func isAfter(_ other: borrowing Base) -> Bool {
-        isAfter(other, by: .ascending)
-    }
-
-    @inlinable
-    public func isEquivalent(to other: borrowing Base) -> Bool {
-        isEquivalent(to: other, by: .ascending)
-    }
-}
 #endif

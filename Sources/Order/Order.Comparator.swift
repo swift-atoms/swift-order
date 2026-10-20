@@ -1,4 +1,3 @@
-
 extension Order {
 
     public struct Comparator<T: ~Copyable>: Sendable {

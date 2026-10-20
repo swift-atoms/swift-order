@@ -11,5 +11,5 @@ extension Order {
 }
 
 #if !hasFeature(Embedded)
-extension Order.Comparison: Swift::Codable {}
+    extension Order.Comparison: Swift::Codable {}
 #endif

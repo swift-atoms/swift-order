@@ -1,4 +1,3 @@
-
 import Order
 import Testing
 
@@ -41,7 +40,9 @@ extension Token {
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Copyable values expose comparator based ordering relations` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+    .`Copyable values expose comparator based ordering relations`
+{
     @Test
     func `Fluent before checks follow the supplied comparator`() {
         var alice = Person(name: "Alice", age: 30)
@@ -100,7 +101,9 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Noncopyable values expose comparator based ordering relations` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+    .`Noncopyable values expose comparator based ordering relations`
+{
     @Test
     func `Fluent before checks follow the supplied comparator`() {
         var a = Token(id: 5)
@@ -136,7 +139,9 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Comparison protocol values expose natural ordering relations` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+    .`Comparison protocol values expose natural ordering relations`
+{
     @Test
     func `Fluent before checks use the natural comparison`() {
         var a = Token(id: 5)
@@ -166,7 +171,9 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Descending comparators reverse fluent ordering relations` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+    .`Descending comparators reverse fluent ordering relations`
+{
     @Test
     func `Descending comparison reverses fluent before checks`() {
         var a = Token(id: 5)
@@ -190,7 +197,9 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Orderable values expose an order accessor across copyability constraints` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+    .`Orderable values expose an order accessor across copyability constraints`
+{
     @Test
     func `Type conforming to Orderable gets .order property`() {
         struct Sample: Order.Orderable {
@@ -266,7 +275,9 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Comparable values expose natural ordering convenience methods` {
+extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+    .`Comparable values expose natural ordering convenience methods`
+{
     @Test
     func `String has convenience methods without explicit comparator`() {
         var apple = "apple"

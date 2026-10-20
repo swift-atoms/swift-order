@@ -1,6 +1,5 @@
-import Testing
-
 import Order
+import Testing
 
 @testable import Order
 
