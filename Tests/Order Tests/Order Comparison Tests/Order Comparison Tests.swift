@@ -3,17 +3,15 @@ import Testing
 
 @testable import Order
 
-extension `Order Comparison Tests`.`Order Comparison Tests` {
-    @Suite
-    struct `Order Comparison Tests` {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-        @Suite struct Integration {}
-        @Suite(.serialized) struct Performance {}
-    }
+@Suite
+struct `Order Comparison Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+    @Suite(.serialized) struct Performance {}
 }
 
-extension `Order Comparison Tests`.`Order Comparison Tests`.Unit {
+extension `Order Comparison Tests`.Unit {
     @Suite struct Comparator {}
     @Suite struct `Comparator Swift.Comparable` {}
     @Suite struct `Comparator Reversal` {}
@@ -51,7 +49,7 @@ extension Comparer {
     }
 }
 
-extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.Comparator {
+extension `Order Comparison Tests`.Unit.Comparator {
     @Test
     func `Create from closure`() {
         let comparator = Order.Comparator<Int> { lhs, rhs in
@@ -72,7 +70,7 @@ extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.Comparator {
     }
 }
 
-extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Comparator Swift.Comparable` {
+extension `Order Comparison Tests`.Unit.`Comparator Swift.Comparable` {
     @Test
     func `Ascending comparator`() {
         let comparator: Order.Comparator<Int> = .ascending
@@ -101,7 +99,7 @@ extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Comparator Swi
     }
 }
 
-extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Comparator Reversal` {
+extension `Order Comparison Tests`.Unit.`Comparator Reversal` {
     @Test
     func `Reversed comparator`() {
         let ascending: Order.Comparator<Int> = .ascending
@@ -123,7 +121,7 @@ extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Comparator Rev
     }
 }
 
-extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Comparator Chaining` {
+extension `Order Comparison Tests`.Unit.`Comparator Chaining` {
     @Test
     func `Chain with then`() {
         let byName = Order.Comparator<Person>.by { $0.name }
@@ -193,7 +191,7 @@ extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Comparator Cha
     }
 }
 
-extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Comparator Projection` {
+extension `Order Comparison Tests`.Unit.`Comparator Projection` {
     @Test
     func `By selector`() {
         let byAge = Order.Comparator<Person>.by { $0.age }
@@ -235,7 +233,7 @@ extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Comparator Pro
     }
 }
 
-extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Partial Comparator` {
+extension `Order Comparison Tests`.Unit.`Partial Comparator` {
     @Test
     func `Returns result for comparable values`() {
         let comparator = Order.Comparator<Double>.Partial { lhs, rhs in
@@ -265,7 +263,7 @@ extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Partial Compar
     }
 }
 
-extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Noncopyable Support` {
+extension `Order Comparison Tests`.Unit.`Noncopyable Support` {
     @Test
     func `Comparator with ~Copyable type`() {
         let comparator = Order.Comparator<Token> { lhs, rhs in
@@ -313,7 +311,7 @@ extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.`Noncopyable Su
     }
 }
 
-extension `Order Comparison Tests`.`Order Comparison Tests`.Unit.Sendability {
+extension `Order Comparison Tests`.Unit.Sendability {
     @Test
     func `Comparator is Sendable`() async {
         let comparator: Order.Comparator<Int> = .ascending
