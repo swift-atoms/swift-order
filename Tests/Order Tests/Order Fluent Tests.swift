@@ -3,15 +3,25 @@ import Testing
 
 @testable import Order
 
-@Suite
-struct `Fluent ordering exposes comparator based relations for values` {
+enum `Order Fluent Tests` {}
+
+extension `Order Fluent Tests` {
+    @Suite
+    struct `Fluent ordering exposes comparator based relations for values` {
+    }
+}
+
+extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values` {
     @Suite struct `Fluent ordering supports explicit natural and reversed comparators` {}
+
     @Suite struct `No fluent order boundary cases are defined` {}
+
     @Suite struct `No fluent order integration cases are defined` {}
+
     @Suite(.serialized) struct `No fluent order performance cases are defined` {}
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators` {
+extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators` {
     @Suite struct `Copyable values expose comparator based ordering relations` {}
     @Suite struct `Noncopyable values expose comparator based ordering relations` {}
     @Suite struct `Comparison protocol values expose natural ordering relations` {}
@@ -40,7 +50,7 @@ extension Token {
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
     .`Copyable values expose comparator based ordering relations`
 {
     @Test
@@ -101,7 +111,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
     .`Noncopyable values expose comparator based ordering relations`
 {
     @Test
@@ -139,7 +149,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
     .`Comparison protocol values expose natural ordering relations`
 {
     @Test
@@ -171,7 +181,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
     .`Descending comparators reverse fluent ordering relations`
 {
     @Test
@@ -197,7 +207,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
     .`Orderable values expose an order accessor across copyability constraints`
 {
     @Test
@@ -233,7 +243,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Standard scalar values expose order accessors` {
+extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Standard scalar values expose order accessors` {
     @Test
     func `Int has .order property`() {
         var a = 5
@@ -275,7 +285,7 @@ extension `Fluent ordering exposes comparator based relations for values`.`Fluen
     }
 }
 
-extension `Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
     .`Comparable values expose natural ordering convenience methods`
 {
     @Test

@@ -3,15 +3,25 @@ import Testing
 
 @testable import Order
 
-@Suite
-struct `Order comparators compose projections directions and partial relations` {
+enum `Order Tests` {}
+
+extension `Order Tests` {
+    @Suite
+    struct `Order comparators compose projections directions and partial relations` {
+    }
+}
+
+extension `Order Tests`.`Order comparators compose projections directions and partial relations` {
     @Suite struct `Order operations preserve reversal chaining projection and capability contracts` {}
+
     @Suite struct `No order comparator boundary cases are defined` {}
+
     @Suite struct `No order comparator integration cases are defined` {}
+
     @Suite(.serialized) struct `No order comparator performance cases are defined` {}
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts` {
+extension `Order Tests`.`Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts` {
     @Suite struct `Order directions enumerate both orientations and reverse consistently` {}
     @Suite struct `Comparators invoke their supplied ordering closure` {}
     @Suite struct `Comparable values support ascending and descending comparators` {}
@@ -59,7 +69,7 @@ extension Holder {
     func get() -> Order.Direction { direction }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+extension `Order Tests`.`Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
     .`Order directions enumerate both orientations and reverse consistently`
 {
     @Test
@@ -84,7 +94,7 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+extension `Order Tests`.`Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
     .`Comparators invoke their supplied ordering closure`
 {
     @Test
@@ -107,7 +117,7 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+extension `Order Tests`.`Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
     .`Comparable values support ascending and descending comparators`
 {
     @Test
@@ -138,7 +148,7 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+extension `Order Tests`.`Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
     .`Reversing comparators exchanges their operand ordering`
 {
     @Test
@@ -162,7 +172,7 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+extension `Order Tests`.`Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
     .`Comparator chains resolve ties in priority order`
 {
     @Test
@@ -234,7 +244,7 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+extension `Order Tests`.`Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
     .`Comparator projections order values by selected keys`
 {
     @Test
@@ -278,7 +288,7 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+extension `Order Tests`.`Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
     .`Partial comparators represent incomparable values explicitly`
 {
     @Test
@@ -310,7 +320,7 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+extension `Order Tests`.`Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
     .`Comparators borrow noncopyable values and projected keys`
 {
     @Test
@@ -360,7 +370,7 @@ extension `Order comparators compose projections directions and partial relation
     }
 }
 
-extension `Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
+extension `Order Tests`.`Order comparators compose projections directions and partial relations`.`Order operations preserve reversal chaining projection and capability contracts`
     .`Order directions and comparators can cross isolation boundaries`
 {
     @Test

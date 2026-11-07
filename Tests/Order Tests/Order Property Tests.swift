@@ -4,15 +4,17 @@
 
     import Order
 
-    @Suite
-    struct `Order Property Tests` {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-        @Suite struct Integration {}
-        @Suite(.serialized) struct Performance {}
-    }
+extension `Order Property Tests`.`Order Property Tests` {
+        @Suite
+        struct `Order Property Tests` {
+            @Suite struct Unit {}
+            @Suite struct `Edge Case` {}
+            @Suite struct Integration {}
+            @Suite(.serialized) struct Performance {}
+        }
+}
 
-    extension `Order Property Tests`.Unit {
+    extension `Order Property Tests`.`Order Property Tests`.Unit {
         @Suite struct `Copyable Types` {}
         @Suite struct `Noncopyable Types` {}
         @Suite struct `Comparison.Protocol Convenience` {}
@@ -41,7 +43,7 @@
         }
     }
 
-    extension `Order Property Tests`.Unit.`Copyable Types` {
+    extension `Order Property Tests`.`Order Property Tests`.Unit.`Copyable Types` {
         @Test
         func `isBefore with explicit comparator`() {
             let alice = Person(name: "Alice", age: 30)
@@ -100,7 +102,7 @@
         }
     }
 
-    extension `Order Property Tests`.Unit.`Noncopyable Types` {
+    extension `Order Property Tests`.`Order Property Tests`.Unit.`Noncopyable Types` {
         @Test
         func `isBefore with explicit comparator`() {
             let comparator: Order.Comparator<Token> = .ascending
@@ -126,7 +128,7 @@
         }
     }
 
-    extension `Order Property Tests`.Unit.`Comparison.Protocol Convenience` {
+    extension `Order Property Tests`.`Order Property Tests`.Unit.`Comparison.Protocol Convenience` {
         @Test
         func `isBefore without explicit comparator`() {
             #expect(Token(id: 5).ordered().isBefore(Token(id: 10)) == true)
@@ -146,7 +148,7 @@
         }
     }
 
-    extension `Order Property Tests`.Unit.`Descending Order` {
+    extension `Order Property Tests`.`Order Property Tests`.Unit.`Descending Order` {
         @Test
         func `isBefore with descending comparator`() {
             let descending: Order.Comparator<Token> = .descending
@@ -164,7 +166,7 @@
         }
     }
 
-    extension `Order Property Tests`.Unit.`Orderable Protocol` {
+    extension `Order Property Tests`.`Order Property Tests`.Unit.`Orderable Protocol` {
         @Test
         func `Type conforming to Orderable gets .ordered() property`() {
             struct Sample: Order.Orderable {
@@ -198,7 +200,7 @@
         }
     }
 
-    extension `Order Property Tests`.Unit.`Standard Type Conformances` {
+    extension `Order Property Tests`.`Order Property Tests`.Unit.`Standard Type Conformances` {
         @Test
         func `Int has .ordered() property`() {
             let a = 5
@@ -240,7 +242,7 @@
         }
     }
 
-    extension `Order Property Tests`.Unit.`Swift.Comparable Convenience` {
+    extension `Order Property Tests`.`Order Property Tests`.Unit.`Swift.Comparable Convenience` {
         @Test
         func `String has convenience methods without explicit comparator`() {
             let apple = "apple"
