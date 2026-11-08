@@ -6,7 +6,7 @@
     import Testing
 
     extension Order.Comparison {
-        @Suite("Enumerable Tests")
+        @Suite
         struct Test {
             @Suite struct Unit {}
         }
