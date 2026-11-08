@@ -1,7 +1,7 @@
 #if Finite
-    public import Finite
-    public import Cardinal
-    public import Index
-    public import Ordinal
-    public import Tagged
+    import Finite
+    import Cardinal
+    import Index
+    import Ordinal
+    import Tagged
 #endif
