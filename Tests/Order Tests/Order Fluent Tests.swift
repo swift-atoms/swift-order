@@ -243,7 +243,9 @@ extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relatio
     }
 }
 
-extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`.`Standard scalar values expose order accessors` {
+extension `Order Fluent Tests`.`Fluent ordering exposes comparator based relations for values`.`Fluent ordering supports explicit natural and reversed comparators`
+    .`Standard scalar values expose order accessors`
+{
     @Test
     func `Int has .order property`() {
         var a = 5
