@@ -321,3 +321,20 @@ extension `Order Comparison Tests`.Unit.Sendability {
     }
 
 }
+
+#if os(macOS) || os(Linux) || os(Windows)
+    extension `Order Comparison Tests`.`Edge Case` {
+        @Test
+        func `Comparison of unordered values traps`() async {
+            await #expect(processExitsWith: .failure) {
+                _ = Order.Comparison(Double.nan, 1.0)
+            }
+            await #expect(processExitsWith: .failure) {
+                _ = Order.Comparison(1.0, Double.nan)
+            }
+            await #expect(processExitsWith: .failure) {
+                _ = Order.Comparator<Double>.ascending(Double.nan, Double.nan)
+            }
+        }
+    }
+#endif
